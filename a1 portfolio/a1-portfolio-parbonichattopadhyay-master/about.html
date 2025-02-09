@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Parboni Chattopadhyay">
+    <meta name="description" content="About Parboni Chattopadhyay">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About - Parboni Chattopadhyay</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .about-container {
+            max-width: 1200px; /* Increased max-width */
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1rem auto;
+            max-width: 100%; /* Ensure content fits */
+            word-wrap: break-word; /* Prevent text overflow */
+        }
+
+        .about-text {
+            line-height: 1.8;
+            font-size: 1rem; /* Slightly smaller font */
+            margin-bottom: 1.5rem;
+            text-align: left;
+            color: #e5e7ec;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 1rem;
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .skills-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .skills-title {
+            color: #64ffda;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap; /* Prevent skill tags from breaking */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .skills-container {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+
+            .about-container {
+                padding: 0.5rem;
+            }
+
+            .about-section {
+                padding: 1rem;
+            }
+
+            .skill-tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <main class="main">
+        <div class="main-content">
+            <div class="about-container">
+                <h1 class="name">About Me</h1>
+                
+                <div class="about-section">
+                    <p class="about-text">
+                        I'm Parboni Chattopadhyay, an Information and Computer Science student at UC Irvine, with roots in New York City. I'm passionate about creating intuitive and impactful software solutions, with an interest in UI/UX design.
+                    </p>
+                    
+                    <p class="about-text">
+                        My goal is to build applications that not only solve complex problems but also provide seamless, user-centered experiences. Outside of coding, I'm deeply interested in creative projects and have a particular love for fashion, which allows me to explore my aesthetic side.
+                    </p>
+
+                    <p class="about-text">
+                        Currently, I do research at UC Irvine where I work with LLMs and test agility methods in SWE. I've worked as a grader helping students understand software engineering concepts, and I've developed various projects using Python, C++, and web development technologies.
+                    </p>
+                </div>
+
+                <div class="skills-container">
+                    <div class="skills-section">
+                        <h2 class="skills-title">Technical Skills</h2>
+                        <div class="skills-list">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">R-coding</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h2 class="skills-title">Soft Skills</h2>
+                        <div class="skills-list">
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Time Management</span>
+                            <span class="skill-tag">Creative Thinking</span>
+                            <span class="skill-tag">Public Speaking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="navigation">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="experience.html" class="nav-link">Experience</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
