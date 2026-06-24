@@ -1,9 +1,10 @@
 // Typing effect configuration
 const titles = [
-    "Information and Computer Science Student",
-    "Software Developer",
-    "UI/UX Enthusiast",
-    "Research Assistant"
+    "Software Engineer",
+    "Aspiring Product Manager",
+    "Full-Stack Developer",
+    "Research Assistant",
+    "UCI Informatics Graduate"
 ];
 
 let titleIndex = 0;
