@@ -43,9 +43,9 @@
 
         .section-title {
             font-family: 'Space Grotesk', sans-serif;
-            color: #ffffff;
-            font-size: 0.7rem;
-            font-weight: 600;
+            color: #aaa;
+            font-size: 0.68rem;
+            font-weight: 400;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             margin-bottom: 1.6rem;
@@ -80,8 +80,8 @@
         .experience-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.95rem;
-            font-weight: 600;
-            color: #e0e0e0;
+            font-weight: 500;
+            color: #d0d0d0;
             margin-bottom: 0.3rem;
         }
 
@@ -132,8 +132,87 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
+        /* === PHOTO GALLERY === */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-item:hover {
+            border-color: rgba(100,255,218,0.25);
+            box-shadow: 0 0 20px rgba(100,255,218,0.06);
+        }
+
+        .photo-item:hover img { transform: scale(1.04); }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            padding: 0.6rem 0.8rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            font-size: 0.72rem;
+            color: #bbb;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-item:hover .photo-caption { opacity: 1; }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.2rem; right: 1.5rem;
+            color: #aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover { color: #64ffda; }
+
         @media (max-width: 768px) {
             .experience-container { padding: 1rem 1rem 3rem; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -169,6 +248,31 @@
                         <div class="experience-date">2026</div>
                         <p class="experience-description">Longitudinal study on AI tool adoption among UCI ICS students, comparing 2024 and 2026 survey data.</p>
                     </div>
+                </div>
+
+                <!-- Photo Gallery -->
+                <div class="section">
+                    <h2 class="section-title">Photos</h2>
+                    <div class="photo-grid">
+                        <div class="photo-item" onclick="openLightbox('photo_pvtgames.png')">
+                            <img src="photo_pvtgames.png" alt="Presenting PVT games at UCI ICS Expo 2026">
+                            <div class="photo-caption">UCI ICS Expo 2026 — PVT Gamification demo</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('photo_expowin.jpg')">
+                            <img src="photo_expowin.jpg" alt="UCI ICS 2026 Project Expo winners">
+                            <div class="photo-caption">2026 ICS Project Expo — 3rd Place</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('photo_capstone.png')">
+                            <img src="photo_capstone.png" alt="Capstone Design Conference at Texas A&M">
+                            <div class="photo-caption">Capstone Design Conference, Texas A&M — 2nd Place National</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lightbox -->
+                <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+                    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+                    <img id="lightbox-img" src="" alt="">
                 </div>
 
                 <!-- Work Experience Section -->
@@ -264,4 +368,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
-</body
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
+</body>
