@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Parboni Chattopadhyay">
+    <meta name="description" content="Contact Parboni Chattopadhyay">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact - Parboni Chattopadhyay</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1rem auto;
+            max-width: 100%;
+            color: #e5e7ec;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #64ffda;
+        }
+
+        .contact-link {
+            color: #e5e7ec;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .contact-link:hover {
+            color: #64ffda;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-link {
+            font-size: 1.5rem;
+            color: #e5e7ec;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #64ffda;
+            transform: translateY(-5px);
+        }
+
+        .contact-text {
+            text-align: center;
+            margin: 1.5rem 0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <main class="main">
+        <div class="main-content">
+            <div class="contact-container">
+                <h1 class="name">Contact Me</h1>
+                
+                <div class="contact-section">
+                    <p class="contact-text">
+                        I'm always interested in new opportunities and collaborations. 
+                        Feel free to reach out to me through any of these platforms!
+                    </p>
+
+                    <div class="contact-grid">
+                        <a href="mailto:parboni845@gmail.com" class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span class="contact-link">parboni845@gmail.com</span>
+                        </a>
+                        
+                        <a href="tel:917-671-8590" class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span class="contact-link">917-671-8590</span>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/parbonichattopadhyay" target="_blank" class="contact-item">
+                            <span class="contact-icon">💼</span>
+                            <span class="contact-link">LinkedIn</span>
+                        </a>
+                        
+                        <a href="https://github.com/parbonichattopadhyay" target="_blank" class="contact-item">
+                            <span class="contact-icon">💻</span>
+                            <span class="contact-link">GitHub</span>
+                        </a>
+                    </div>
+
+                    <div class="contact-text" style="margin-top: 2rem;">
+                        Currently based in Irvine, California & New York, New York
+                    </div>
+                </div>
+
+                <nav class="navigation">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="experience.html" class="nav-link">Experience</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
