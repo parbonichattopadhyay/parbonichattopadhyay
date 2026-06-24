@@ -8,182 +8,176 @@
     <title>Experience - Parboni Chattopadhyay</title>
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; overflow-y: auto; }
 
-        .experience-container {
-            max-width: 820px;
-            width: 95%;
+        /* TOP NAV */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: rgba(8,8,8,0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* PAGE WRAPPER */
+        .page-wrap {
+            width: 92%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
-            color: #aaa;
+            padding: 6rem 0 5rem;
             position: relative;
             z-index: 2;
         }
 
-        .name {
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: #ffffff;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            color: #fff;
             letter-spacing: -0.03em;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 1.8rem;
-            margin: 1.2rem 0;
-            transition: border-color 0.3s ease;
-        }
-
-        .section:hover { border-color: rgba(100, 255, 218, 0.12); }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            color: #aaa;
-            font-size: 0.68rem;
-            font-weight: 400;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 1.6rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid rgba(100, 255, 218, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #64ffda;
-            box-shadow: 0 0 8px #64ffda;
-        }
-
-        .experience-item {
-            margin-bottom: 1.6rem;
-            padding-left: 1rem;
-            border-left: 1px solid rgba(100, 255, 218, 0.15);
-            transition: border-color 0.3s ease;
-        }
-
-        .experience-item:last-child { margin-bottom: 0; }
-
-        .experience-item:hover { border-left-color: rgba(100, 255, 218, 0.5); }
-
-        .experience-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #d0d0d0;
+            font-weight: 600;
             margin-bottom: 0.3rem;
         }
 
-        .experience-place {
-            font-size: 0.82rem;
-            color: #64ffda;
-            margin-bottom: 0.25rem;
-            opacity: 0.85;
+        .page-sub {
+            font-size: 0.88rem;
+            color: #444;
+            letter-spacing: 0.05em;
         }
 
-        .experience-date {
-            font-size: 0.75rem;
+        /* SECTION CARD */
+        .section {
+            background: rgba(255,255,255,0.018);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 2.4rem 2.8rem;
+            margin-bottom: 1.6rem;
+            transition: border-color 0.3s;
+        }
+
+        .section:hover { border-color: rgba(100,255,218,0.08); }
+
+        .section-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
             color: #555;
-            margin-bottom: 0.6rem;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid rgba(100,255,218,0.1);
         }
 
-        .experience-description {
-            line-height: 1.75;
-            font-size: 0.875rem;
-            color: #888;
+        .section-label::before {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #64ffda;
+            box-shadow: 0 0 8px #64ffda;
+            flex-shrink: 0;
         }
 
-        .experience-description a {
-            color: #64ffda;
-            text-decoration: none;
-            opacity: 0.85;
-            transition: opacity 0.2s;
+        /* AWARDS 3-col */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
         }
 
-        .experience-description a:hover { opacity: 1; }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .award-card {
+            background: rgba(100,255,218,0.025);
+            border: 1px solid rgba(100,255,218,0.07);
+            border-radius: 16px;
+            padding: 1.6rem;
+            transition: all 0.3s ease;
         }
 
-        .project-card:last-child { margin-bottom: 0; }
-
-        .project-card:hover {
-            border-color: rgba(100, 255, 218, 0.25);
-            background: rgba(100, 255, 218, 0.02);
+        .award-card:hover {
+            border-color: rgba(100,255,218,0.2);
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
-        /* === PHOTO GALLERY === */
+        .award-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+
+        .award-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #d8d8d8;
+            line-height: 1.45;
+            margin-bottom: 0.4rem;
+        }
+
+        .award-place { font-size: 0.78rem; color: #64ffda; opacity: 0.8; margin-bottom: 0.2rem; }
+        .award-date { font-size: 0.72rem; color: #3a3a3a; margin-bottom: 0.7rem; }
+        .award-desc { font-size: 0.83rem; color: #666; line-height: 1.65; }
+
+        /* PHOTO GRID */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
+            gap: 1.2rem;
         }
 
         .photo-item {
             position: relative;
-            border-radius: 10px;
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            border: 1px solid rgba(255,255,255,0.05);
+            aspect-ratio: 4/5;
             cursor: pointer;
-            aspect-ratio: 4/3;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
         }
 
         .photo-item img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
 
         .photo-item:hover {
-            border-color: rgba(100,255,218,0.25);
-            box-shadow: 0 0 20px rgba(100,255,218,0.06);
+            border-color: rgba(100,255,218,0.28);
+            box-shadow: 0 0 35px rgba(100,255,218,0.07);
+            transform: translateY(-5px);
         }
 
-        .photo-item:hover img { transform: scale(1.04); }
+        .photo-item:hover img { transform: scale(1.05); }
 
         .photo-caption {
             position: absolute;
-            bottom: 0;
-            left: 0; right: 0;
-            padding: 0.6rem 0.8rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            font-size: 0.72rem;
-            color: #bbb;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.4rem 1.1rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.82));
+            font-size: 0.76rem;
+            color: #ccc;
+            line-height: 1.4;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
         .photo-item:hover .photo-caption { opacity: 1; }
 
-        /* Lightbox */
+        /* LIGHTBOX */
         .lightbox {
             display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.93);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -193,178 +187,258 @@
         .lightbox.active { display: flex; }
 
         .lightbox img {
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 90vw; max-height: 90vh;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .lightbox-close {
             position: absolute;
-            top: 1.2rem; right: 1.5rem;
-            color: #aaa;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.2s;
+            top: 1.4rem; right: 1.8rem;
+            color: #666; font-size: 1.4rem;
+            cursor: pointer; transition: color 0.2s;
         }
 
         .lightbox-close:hover { color: #64ffda; }
 
-        @media (max-width: 768px) {
-            .experience-container { padding: 1rem 1rem 3rem; }
+        /* EXPERIENCE 2-col layout */
+        .exp-item {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2rem;
+            padding: 1.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .exp-item:first-child { padding-top: 0; }
+
+        .exp-meta { }
+
+        .exp-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.93rem;
+            font-weight: 500;
+            color: #d0d0d0;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-place { font-size: 0.8rem; color: #64ffda; opacity: 0.8; margin-bottom: 0.2rem; }
+        .exp-date { font-size: 0.72rem; color: #3a3a3a; }
+
+        .exp-body {
+            font-size: 0.875rem;
+            line-height: 1.82;
+            color: #777;
+        }
+
+        .exp-body a { color: #64ffda; text-decoration: none; opacity: 0.85; transition: opacity 0.2s; }
+        .exp-body a:hover { opacity: 1; }
+
+        /* PROJECTS 2-col */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.4rem;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.018);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .project-card:hover {
+            border-color: rgba(100,255,218,0.18);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.3);
+        }
+
+        .proj-stack { font-size: 0.8rem; color: #64ffda; opacity: 0.75; margin-bottom: 0.2rem; }
+        .proj-date { font-size: 0.72rem; color: #3a3a3a; margin-bottom: 0.8rem; }
+        .proj-desc { font-size: 0.875rem; line-height: 1.78; color: #777; }
+
+        .proj-links { margin-top: 1.1rem; display: flex; gap: 1rem; }
+        .proj-links a { color: #64ffda; text-decoration: none; font-size: 0.82rem; opacity: 0.8; transition: opacity 0.2s; }
+        .proj-links a:hover { opacity: 1; }
+
+        @media (max-width: 900px) {
+            .awards-grid { grid-template-columns: 1fr; }
+            .exp-item { grid-template-columns: 1fr; gap: 0.6rem; }
+            .projects-grid { grid-template-columns: 1fr; }
             .photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .page-wrap { width: 96%; }
+            .section { padding: 1.8rem 1.6rem; }
+        }
+
+        @media (max-width: 600px) {
+            .page-wrap { padding-top: 5rem; }
+            .photo-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
     <div id="particles-js"></div>
-    <main class="main">
-        <div class="main-content">
-            <div class="experience-container">
-                <h1 class="name">Experience & Projects</h1>
 
-                <!-- Awards Section -->
-                <div class="section">
-                    <h2 class="section-title">Awards & Recognition</h2>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
 
-                    <div class="experience-item">
-                        <h3 class="experience-title">🏆 2nd Place — 2026 Capstone Design Conference (National)</h3>
-                        <div class="experience-place">Texas A&M University</div>
-                        <div class="experience-date">June 2026</div>
-                        <p class="experience-description">Presented gamified pediatric PVT cognitive assessment app among engineering teams from across the country.</p>
-                    </div>
+    <div class="page-wrap">
 
-                    <div class="experience-item">
-                        <h3 class="experience-title">🏆 3rd Place — UCI ICS 2026 Senior Design Expo</h3>
-                        <div class="experience-place">UC Irvine Donald Bren School of ICS</div>
-                        <div class="experience-date">June 2026</div>
-                        <p class="experience-description">Senior capstone project delivering clinically-informed software for pediatric sleep research in collaboration with UCI School of Medicine.</p>
-                    </div>
+        <div class="page-header">
+            <h1 class="page-title">Experience & Projects</h1>
+            <p class="page-sub">UCI Informatics '26 · Software Engineer · Researcher</p>
+        </div>
 
-                    <div class="experience-item">
-                        <h3 class="experience-title">📄 Research Accepted — ICCSE 2026</h3>
-                        <div class="experience-place">International Conference on Computer Science Education</div>
-                        <div class="experience-date">2026</div>
-                        <p class="experience-description">Longitudinal study on AI tool adoption among UCI ICS students, comparing 2024 and 2026 survey data.</p>
-                    </div>
+        <!-- AWARDS -->
+        <div class="section">
+            <div class="section-label">Awards & Recognition</div>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-title">2nd Place — 2026 Capstone Design Conference (National)</div>
+                    <div class="award-place">Texas A&M University</div>
+                    <div class="award-date">June 2026</div>
+                    <div class="award-desc">Presented gamified pediatric PVT cognitive assessment app among engineering teams from across the country.</div>
                 </div>
-
-                <!-- Photo Gallery -->
-                <div class="section">
-                    <h2 class="section-title">Photos</h2>
-                    <div class="photo-grid">
-                        <div class="photo-item" onclick="openLightbox('photo_pvtgames.png')">
-                            <img src="photo_pvtgames.png" alt="Presenting PVT games at UCI ICS Expo 2026">
-                            <div class="photo-caption">UCI ICS Expo 2026 — PVT Gamification demo</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('photo_expowin.jpg')">
-                            <img src="photo_expowin.jpg" alt="UCI ICS 2026 Project Expo winners">
-                            <div class="photo-caption">2026 ICS Project Expo — 3rd Place</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('photo_capstone.png')">
-                            <img src="photo_capstone.png" alt="Capstone Design Conference at Texas A&M">
-                            <div class="photo-caption">Capstone Design Conference, Texas A&M — 2nd Place National</div>
-                        </div>
-                    </div>
+                <div class="award-card">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-title">3rd Place — UCI ICS 2026 Senior Design Expo</div>
+                    <div class="award-place">UC Irvine Donald Bren School of ICS</div>
+                    <div class="award-date">June 2026</div>
+                    <div class="award-desc">Senior capstone delivering clinically-informed software for pediatric sleep research with UCI School of Medicine.</div>
                 </div>
-
-                <!-- Lightbox -->
-                <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-                    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
-                    <img id="lightbox-img" src="" alt="">
+                <div class="award-card">
+                    <div class="award-icon">📄</div>
+                    <div class="award-title">Research Accepted — ICCSE 2026</div>
+                    <div class="award-place">International Conference on Computer Science Education</div>
+                    <div class="award-date">2026</div>
+                    <div class="award-desc">Longitudinal study on AI tool adoption among UCI ICS students, comparing 2024 and 2026 survey data.</div>
                 </div>
-
-                <!-- Work Experience Section -->
-                <div class="section">
-                    <h2 class="section-title">Experience</h2>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title">Undergraduate Research Software Engineer</h3>
-                        <div class="experience-place">SLEEP Lab (Sleep, Learning & Emotion in Pediatrics) — UC Irvine</div>
-                        <div class="experience-date">January 2026 – Present</div>
-                        <p class="experience-description">
-                            Engineered sports-themed gamified PVT modules in Unity (C#) as a senior capstone in collaboration with UCI School of Medicine, targeting 10–20 games. Led the full software development lifecycle from ideation to prototyping to clinical integration. Earned 2nd place nationally at the 2026 Capstone Design Conference (Texas A&M) and 3rd place at UCI ICS Expo 2026. <a href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" style="color:#64ffda;">Featured in UCI ICS News →</a>
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title">Software Engineering Intern</h3>
-                        <div class="experience-place">Numecent</div>
-                        <div class="experience-date">June 2025 – September 2025</div>
-                        <p class="experience-description">
-                            Designed and implemented a secure C++ execution framework enabling automated PowerShell deployment across SYSTEM and user contexts. Architected privilege-aware validation logic enforcing least-privilege security constraints, integrated PsExec for elevated execution testing, and developed automated test scripts to validate cross-context deployment reliability.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title">NASA L'Space Research Program</h3>
-                        <div class="experience-place">NASA-Affiliated Program</div>
-                        <div class="experience-date">August 2025 – December 2025</div>
-                        <p class="experience-description">
-                            Collaborated in a cross-functional team to design a conceptual mission architecture improving astronaut safety and mission efficiency. Applied systems engineering principles including requirements analysis, trade-off studies, and SDLC documentation, delivering formal technical presentations to NASA-affiliated mentors.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title">Undergraduate Research Assistant — AI/LLM Education Impact Research</h3>
-                        <div class="experience-place">UC Irvine (Prof. Hadar Ziv)</div>
-                        <div class="experience-date">June 2024 – Present</div>
-                        <p class="experience-description">
-                            Developed LLM-assisted qualitative coding pipelines using OpenAI Codex — applying direct inductive prompting, semantic clustering, and HICode — to analyze 1,200+ open-ended survey responses. Built automated ETL preprocessing pipelines in Python (Pandas), reducing manual data cleaning effort by ~60%. Research accepted to ICCSE 2026; re-running updated survey in 2026 for longitudinal comparison.
-                        </p>
-                    </div>
-
-                    <div class="experience-item">
-                        <h3 class="experience-title">Software Engineering Grader — Informatics 43</h3>
-                        <div class="experience-place">UC Irvine</div>
-                        <div class="experience-date">September 2024 – Present</div>
-                        <p class="experience-description">
-                            Evaluated 20+ student software engineering projects per quarter on modularity, OOP design patterns, testing coverage, and documentation. Provided structured feedback on refactoring strategies, Agile/Scrum, and SDLC best practices.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Projects Section -->
-                <div class="section">
-                    <h2 class="section-title">Projects</h2>
-
-                    <div class="project-card">
-                        <h3 class="experience-title">Zot Spot — Full-Stack Hygiene Tracking App</h3>
-                        <div class="experience-place" style="font-size:0.85rem;">Angular · Node.js · JavaScript · REST API</div>
-                        <div class="experience-date">May 2025 · Venus Hackathon</div>
-                        <p class="experience-description">
-                            Architected responsive Angular UI components and interactive dashboards to visualize behavioral health metrics in real time. Integrated RESTful API endpoints between Angular frontend and Node.js backend for seamless data sync.
-                        </p>
-                        <div style="margin-top:0.75rem; display:flex; gap:1rem;">
-                            <a href="https://venushacks-1.onrender.com" target="_blank" style="color:#64ffda; font-size:0.85rem;">Live Demo →</a>
-                            <a href="https://devpost.com/software/zot-spot" target="_blank" style="color:#64ffda; font-size:0.85rem;">Devpost →</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <h3 class="experience-title">HealthHarmonies — Personal Health Resource Web App</h3>
-                        <div class="experience-place" style="font-size:0.85rem;">HTML5 · CSS3 · JavaScript · WCAG Accessibility</div>
-                        <div class="experience-date">February 2026</div>
-                        <p class="experience-description">
-                            Built a WCAG-compliant, mobile-first health informatics app applying human-centered design principles and iterative prototyping to deliver an accessible, clinically-informed user interface.
-                        </p>
-                        <div style="margin-top:0.75rem; display:flex; gap:1rem;">
-                            <a href="https://parbonichattopadhyay.github.io/HealthHarmonies/" target="_blank" style="color:#64ffda; font-size:0.85rem;">Live →</a>
-                            <a href="https://github.com/parbonichattopadhyay/HealthHarmonies" target="_blank" style="color:#64ffda; font-size:0.85rem;">GitHub →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <nav class="navigation">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="experience.html" class="nav-link">Experience</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
             </div>
         </div>
-    </main>
+
+        <!-- PHOTOS -->
+        <div class="section">
+            <div class="section-label">Photos</div>
+            <div class="photo-grid">
+                <div class="photo-item" onclick="openLightbox('photo_pvtgames.png')">
+                    <img src="photo_pvtgames.png" alt="PVT games demo at UCI ICS Expo 2026">
+                    <div class="photo-caption">UCI ICS Expo 2026 — PVT Gamification demo</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox('photo_expowin.jpg')">
+                    <img src="photo_expowin.jpg" alt="UCI ICS 2026 Project Expo winners">
+                    <div class="photo-caption">2026 ICS Project Expo — 3rd Place</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox('photo_capstone.png')">
+                    <img src="photo_capstone.png" alt="Capstone Design Conference at Texas A&M">
+                    <div class="photo-caption">Capstone Design Conference, Texas A&M — 2nd Place National</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIGHTBOX -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+            <img id="lightbox-img" src="" alt="">
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+            <div class="section-label">Experience</div>
+
+            <div class="exp-item">
+                <div class="exp-meta">
+                    <div class="exp-title">Undergraduate Research Software Engineer</div>
+                    <div class="exp-place">SLEEP Lab — UC Irvine</div>
+                    <div class="exp-date">January 2026 – Present</div>
+                </div>
+                <div class="exp-body">
+                    Engineered sports-themed gamified PVT modules in Unity (C#) as a senior capstone in collaboration with UCI School of Medicine, targeting 10–20 games. Led the full software development lifecycle from ideation to prototyping to clinical integration. Earned 2nd place nationally at the 2026 Capstone Design Conference (Texas A&M) and 3rd place at UCI ICS Expo 2026. <a href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank">Featured in UCI ICS News →</a>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-meta">
+                    <div class="exp-title">Software Engineering Intern</div>
+                    <div class="exp-place">Numecent</div>
+                    <div class="exp-date">June 2025 – September 2025</div>
+                </div>
+                <div class="exp-body">
+                    Designed and implemented a secure C++ execution framework enabling automated PowerShell deployment across SYSTEM and user contexts. Architected privilege-aware validation logic enforcing least-privilege security constraints, integrated PsExec for elevated execution testing, and developed automated test scripts to validate cross-context deployment reliability.
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-meta">
+                    <div class="exp-title">NASA L'Space Research Program</div>
+                    <div class="exp-place">NASA-Affiliated Program</div>
+                    <div class="exp-date">August 2025 – December 2025</div>
+                </div>
+                <div class="exp-body">
+                    Collaborated in a cross-functional team to design a conceptual mission architecture improving astronaut safety and mission efficiency. Applied systems engineering principles including requirements analysis, trade-off studies, and SDLC documentation, delivering formal technical presentations to NASA-affiliated mentors.
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-meta">
+                    <div class="exp-title">Research Assistant — AI/LLM Education Impact</div>
+                    <div class="exp-place">UC Irvine (Prof. Hadar Ziv)</div>
+                    <div class="exp-date">June 2024 – Present</div>
+                </div>
+                <div class="exp-body">
+                    Developed LLM-assisted qualitative coding pipelines using OpenAI Codex — applying direct inductive prompting, semantic clustering, and HICode — to analyze 1,200+ open-ended survey responses. Built automated ETL preprocessing pipelines in Python (Pandas), reducing manual data cleaning effort by ~60%. Research accepted to ICCSE 2026.
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-meta">
+                    <div class="exp-title">Software Engineering Grader — INF 43</div>
+                    <div class="exp-place">UC Irvine</div>
+                    <div class="exp-date">September 2024 – Present</div>
+                </div>
+                <div class="exp-body">
+                    Evaluated 20+ student software engineering projects per quarter on modularity, OOP design patterns, testing coverage, and documentation. Provided structured feedback on refactoring strategies, Agile/Scrum, and SDLC best practices.
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section">
+            <div class="section-label">Projects</div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="exp-title">Zot Spot — Full-Stack Hygiene Tracking App</div>
+                    <div class="proj-stack">Angular · Node.js · JavaScript · REST API</div>
+                    <div class="proj-date">May 2025 · Venus Hackathon</div>
+                    <div class="proj-desc">Architected responsive Angular UI components and interactive dashboards to visualize behavioral health metrics in real time. Integrated RESTful API endpoints between Angular frontend and Node.js backend for seamless data sync.</div>
+                    <div class="proj-links">
+                        <a href="https://venushacks-1.onrender.com" target="_blank">Live Demo →</a>
+                        <a href="https://devpost.com/software/zot-spot" target="_blank">Devpost →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="exp-title">HealthHarmonies — Health Resource Web App</div>
+                    <div class="proj-stack">HTML5 · CSS3 · JavaScript · WCAG Accessibility</div>
+                    <div class="proj-date">February 2026</div>
+                    <div class="proj-desc">Built a WCAG-compliant, mobile-first health informatics app applying human-centered design principles and iterative prototyping to deliver an accessible, clinically-informed user interface.</div>
+                    <div class="proj-links">
+                        <a href="https://parbonichattopadhyay.github.io/HealthHarmonies/" target="_blank">Live →</a>
+                        <a href="https://github.com/parbonichattopadhyay/HealthHarmonies" target="_blank">GitHub →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
@@ -379,3 +453,4 @@
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     </script>
 </body>
+</html>
