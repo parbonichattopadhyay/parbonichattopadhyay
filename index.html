@@ -12,29 +12,264 @@ EMAIL: parboni845@gmail.com
     <meta name="description" content="Personal portfolio website">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Parboni Chattopadhyay</title>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* === HERO LAYOUT === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* === PHOTO FRAME === */
+        .photo-frame {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Offset border behind the photo */
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 4px;
+            transform: rotate(3deg);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.4s ease;
+        }
+
+        .photo-frame:hover::before {
+            transform: rotate(0deg);
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+
+        /* Second offset layer */
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border: 1px solid rgba(100, 255, 218, 0.07);
+            border-radius: 4px;
+            transform: rotate(-1.5deg);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.4s ease;
+        }
+
+        .photo-frame:hover::after {
+            transform: rotate(0deg);
+            border-color: rgba(100, 255, 218, 0.15);
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 380px;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border-radius: 3px;
+            filter: grayscale(80%) contrast(1.05);
+            transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.4,0,0.2,1), box-shadow 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-frame:hover .profile-image {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.01);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(100,255,218,0.08);
+        }
+
+        /* === TEXT SIDE === */
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            color: #64ffda;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeInUp 0.7s ease 0.1s forwards;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 5.5vw, 5.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            color: #64ffda;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            min-height: 1.8em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.35s forwards;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 0.65rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .nav-link:hover {
+            color: #64ffda;
+            border-color: rgba(100,255,218,0.4);
+            background: rgba(100,255,218,0.05);
+            box-shadow: 0 0 20px rgba(100,255,218,0.08);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:nth-child(1) { animation: fadeInUp 0.6s ease 0.45s forwards; }
+        .nav-link:nth-child(2) { animation: fadeInUp 0.6s ease 0.52s forwards; }
+        .nav-link:nth-child(3) { animation: fadeInUp 0.6s ease 0.59s forwards; }
+        .nav-link:nth-child(4) { animation: fadeInUp 0.6s ease 0.66s forwards; }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .scroll-hint span {
+            font-size: 0.62rem;
+            color: #333;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(100,255,218,0.3), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 0.9em;
+            background: #64ffda;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+
+        @media (max-width: 860px) {
+            .hero-inner {
+                flex-direction: column;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .profile-image { width: 220px; height: 280px; }
+            .navigation { justify-content: center; }
+            .hero-label { text-align: center; }
+        }
+
+        @media (max-width: 500px) {
+            .profile-image { width: 180px; height: 230px; }
+            .name { font-size: 2.6rem; }
+        }
+    </style>
 </head>
 
 <body>
     <div id="particles-js"></div>
-    <main class="main">
-        <div class="main-content">
-            <img src="picture.png" alt="Parboni Chattopadhyay" class="profile-image" id="profile-image">
-            <h1 class="name">Hi! I'm Parboni :)</h1>
-            <p class="title"><span id="typed-text"></span><span class="cursor"></span></p>
-            <nav class="navigation">
-              <a href="index.html" class="nav-link">Home</a>
-              <a href="about.html" class="nav-link">About</a>
-              <a href="experience.html" class="nav-link">Experience</a>
-              <a href="contact.html" class="nav-link">Contact</a>
-          </nav>
+
+    <main class="hero">
+        <div class="hero-inner">
+
+            <!-- Photo -->
+            <div class="photo-frame">
+                <img src="picture.png" alt="Parboni Chattopadhyay" class="profile-image" id="profile-image">
+            </div>
+
+            <!-- Text -->
+            <div class="hero-text">
+                <p class="hero-label">Portfolio</p>
+                <h1 class="name">Hi! I'm<br>Parboni :)</h1>
+                <p class="title"><span id="typed-text"></span><span class="cursor"></span></p>
+                <nav class="navigation">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="experience.html" class="nav-link">Experience</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </main>
 
-
-
-    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
