@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+/* === RESET === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === BASE === */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #080808;
+    color: #c8c8c8;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* === PARTICLES === */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #64ffda44; border-radius: 4px; }
+
+/* === MAIN LAYOUT === */
+.main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* === PROFILE IMAGE === */
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(100, 255, 218, 0.25);
+    box-shadow: 0 0 40px rgba(100, 255, 218, 0.08), 0 0 0 6px rgba(100,255,218,0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.profile-image:hover {
+    border-color: #64ffda;
+    box-shadow: 0 0 60px rgba(100, 255, 218, 0.2), 0 0 0 8px rgba(100,255,218,0.07);
+    transform: scale(1.04);
+}
+
+/* === TYPOGRAPHY === */
+.name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
+    line-height: 1.1;
+}
+
+.title {
+    min-height: 1.8em;
+    font-size: 1.05rem;
+    color: #64ffda;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.25s forwards;
+}
+
+/* === CURSOR === */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    background: #64ffda;
+    margin-left: 3px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+}
+
+/* === NAVIGATION === */
+.navigation {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.nav-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.55rem 1.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(12px);
+    background: rgba(255,255,255,0.02);
+}
+
+.nav-link:hover {
+    color: #64ffda;
+    border-color: rgba(100, 255, 218, 0.4);
+    background: rgba(100, 255, 218, 0.05);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.08);
+    transform: translateY(-2px);
+}
+
+.nav-link:nth-child(1) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.35s forwards; }
+.nav-link:nth-child(2) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.45s forwards; }
+.nav-link:nth-child(3) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.55s forwards; }
+.nav-link:nth-child(4) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.65s forwards; }
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .main-content { padding: 1rem; gap: 1.2rem; }
+    .profile-image { width: 120px; height: 120px; }
+    .navigation { gap: 0.4rem; }
+    .nav-link { font-size: 0.68rem; padding: 0.5rem 1rem; }
+}

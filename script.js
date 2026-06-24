@@ -44,28 +44,28 @@ function typeText() {
 const particlesConfig = {
     particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#64ffda' },
+        color: { value: ['#64ffda', '#ffffff', '#a78bfa'] },
         shape: { type: 'circle' },
         opacity: {
-            value: 0.5,
-            random: false,
-            animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            value: 0.35,
+            random: true,
+            animation: { enable: true, speed: 0.8, minimumValue: 0.05, sync: false }
         },
         size: {
-            value: 3,
+            value: 2,
             random: true,
-            animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            animation: { enable: true, speed: 1.5, minimumValue: 0.1, sync: false }
         },
         line_linked: {
             enable: true,
-            distance: 150,
+            distance: 140,
             color: '#64ffda',
-            opacity: 0.4,
+            opacity: 0.08,
             width: 1
         },
         move: {
             enable: true,
-            speed: 2,
+            speed: 1.2,
             direction: 'none',
             random: false,
             straight: false,
