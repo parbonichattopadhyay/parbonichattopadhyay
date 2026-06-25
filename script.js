@@ -44,7 +44,7 @@ function typeText() {
 const particlesConfig = {
     particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: ['#64ffda', '#ffffff', '#a78bfa'] },
+        color: { value: ['#89ca78', '#c792ea', '#e2b93d', '#dbd9c8'] },
         shape: { type: 'circle' },
         opacity: {
             value: 0.35,
@@ -59,7 +59,7 @@ const particlesConfig = {
         line_linked: {
             enable: true,
             distance: 140,
-            color: '#64ffda',
+            color: '#89ca78',
             opacity: 0.08,
             width: 1
         },

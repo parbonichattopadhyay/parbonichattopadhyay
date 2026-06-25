@@ -1,4 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;1,400&display=swap');
+
+/* === COLOR TOKENS (New Moon / Tania-inspired) === */
+:root {
+    --bg:         #141920;
+    --bg-card:    rgba(255,255,255,0.025);
+    --bg-hover:   rgba(255,255,255,0.04);
+    --text:       #abb2bf;
+    --text-dim:   #5c6370;
+    --text-bright:#dbd9c8;
+    --accent:     #89ca78;   /* muted green — New Moon strings */
+    --accent-2:   #c792ea;   /* lavender — New Moon keywords */
+    --accent-3:   #e2b93d;   /* warm yellow — New Moon numbers */
+    --border:     rgba(255,255,255,0.07);
+    --border-accent: rgba(137,202,120,0.2);
+}
 
 /* === RESET === */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -6,8 +21,8 @@
 /* === BASE === */
 body {
     font-family: 'Inter', sans-serif;
-    background: #080808;
-    color: #c8c8c8;
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
     line-height: 1.6;
 }
@@ -22,85 +37,10 @@ body {
 
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #64ffda44; border-radius: 4px; }
+::-webkit-scrollbar-track { background: #0e1217; }
+::-webkit-scrollbar-thumb { background: rgba(137,202,120,0.3); border-radius: 4px; }
 
-/* === MAIN LAYOUT === */
-.main {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    padding: 1rem;
-    overflow: hidden;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.4rem;
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-    padding: 1rem;
-}
-
-/* === PROFILE IMAGE === */
-.profile-image {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1.5px solid rgba(100, 255, 218, 0.25);
-    box-shadow: 0 0 50px rgba(100, 255, 218, 0.08), 0 0 0 8px rgba(100,255,218,0.04);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-}
-
-.profile-image:hover {
-    border-color: #64ffda;
-    box-shadow: 0 0 80px rgba(100, 255, 218, 0.2), 0 0 0 10px rgba(100,255,218,0.07);
-    transform: scale(1.03);
-}
-
-/* === TYPOGRAPHY === */
-.name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.03em;
-    opacity: 0;
-    transform: translateY(24px);
-    animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
-    line-height: 1.1;
-}
-
-.title {
-    min-height: 1.8em;
-    font-size: 1.3rem;
-    color: #64ffda;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.25s forwards;
-}
-
-/* === CURSOR === */
-.cursor {
-    display: inline-block;
-    width: 2px;
-    height: 0.9em;
-    background: #64ffda;
-    margin-left: 3px;
-    vertical-align: middle;
-    animation: blink 1s infinite;
-}
-
-/* === NAVIGATION === */
+/* === NAVIGATION (shared pill links) === */
 .navigation {
     display: flex;
     gap: 0.5rem;
@@ -110,33 +50,32 @@ body {
 }
 
 .nav-link {
-    color: #666;
+    color: var(--text-dim);
     text-decoration: none;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    padding: 0.65rem 1.6rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--border);
     border-radius: 100px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateY(12px);
-    background: rgba(255,255,255,0.02);
+    background: var(--bg-card);
 }
 
 .nav-link:hover {
-    color: #64ffda;
-    border-color: rgba(100, 255, 218, 0.4);
-    background: rgba(100, 255, 218, 0.05);
-    box-shadow: 0 0 20px rgba(100, 255, 218, 0.08);
+    color: var(--accent);
+    border-color: var(--border-accent);
+    background: rgba(137,202,120,0.06);
     transform: translateY(-2px);
 }
 
-.nav-link:nth-child(1) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.35s forwards; }
-.nav-link:nth-child(2) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.45s forwards; }
-.nav-link:nth-child(3) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.55s forwards; }
-.nav-link:nth-child(4) { animation: fadeInUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.65s forwards; }
+.nav-link:nth-child(1) { animation: fadeInUp 0.6s ease 0.35s forwards; }
+.nav-link:nth-child(2) { animation: fadeInUp 0.6s ease 0.43s forwards; }
+.nav-link:nth-child(3) { animation: fadeInUp 0.6s ease 0.51s forwards; }
+.nav-link:nth-child(4) { animation: fadeInUp 0.6s ease 0.59s forwards; }
 
 /* === ANIMATIONS === */
 @keyframes fadeInUp {
@@ -148,10 +87,114 @@ body {
     50% { opacity: 0; }
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-    .main-content { padding: 1rem; gap: 1.2rem; }
-    .profile-image { width: 120px; height: 120px; }
-    .navigation { gap: 0.4rem; }
-    .nav-link { font-size: 0.68rem; padding: 0.5rem 1rem; }
+/* === CURSOR === */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    background: var(--accent);
+    margin-left: 3px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+}
+
+/* === TOP NAV BAR (for inner pages) === */
+.top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: rgba(20, 25, 32, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+/* Top nav links don't need animation */
+.top-nav .nav-link {
+    opacity: 1;
+    transform: none;
+    animation: none;
+}
+
+.top-nav .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+/* === PAGE WRAPPER (inner pages) === */
+.page-wrap {
+    width: 92%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 0 5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-header { margin-bottom: 3rem; }
+
+.page-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--text-bright);
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.page-sub {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    font-style: italic;
+    font-family: 'Lora', serif;
+}
+
+/* === SECTION CARDS (inner pages) === */
+.section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.4rem 2.8rem;
+    margin-bottom: 1.6rem;
+    transition: border-color 0.3s;
+}
+
+.section:hover { border-color: rgba(137,202,120,0.1); }
+
+.section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.63rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-label::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+    .page-wrap { width: 96%; }
+    .section { padding: 1.8rem 1.6rem; }
+}
+
+@media (max-width: 600px) {
+    .page-wrap { padding-top: 5rem; }
+    .top-nav { gap: 0.3rem; padding: 0.75rem 1rem; }
 }
