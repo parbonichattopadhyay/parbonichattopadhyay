@@ -90,9 +90,12 @@ const particlesConfig = {
 
 // Initialize everything when the window loads
 window.onload = function() {
-    // Initialize particles
-    particlesJS('particles-js', particlesConfig);
-    
-    // Start typing effect
-    typeText();
+    // Only init particles if the library is loaded AND the element exists
+    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+        particlesJS('particles-js', particlesConfig);
+    }
+    // Start typing effect if element exists
+    if (document.getElementById('typed-text')) {
+        typeText();
+    }
 };
