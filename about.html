@@ -12,80 +12,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; overflow-y: auto; }
 
-        /* TOP NAV */
-        .top-nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.9rem 2rem;
-            background: rgba(8,8,8,0.8);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-
-        /* PAGE WRAPPER */
-        .page-wrap {
-            width: 92%;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 6rem 0 5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .page-header { margin-bottom: 3rem; }
-
-        .page-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            color: #fff;
-            letter-spacing: -0.03em;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-sub { font-size: 0.88rem; color: #444; letter-spacing: 0.05em; }
-
-        /* SECTION CARD */
-        .section {
-            background: rgba(255,255,255,0.018);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 2.4rem 2.8rem;
-            margin-bottom: 1.6rem;
-            transition: border-color 0.3s;
-        }
-
-        .section:hover { border-color: rgba(100,255,218,0.08); }
-
-        .section-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 400;
-            color: #555;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            margin-bottom: 2rem;
-            padding-bottom: 0.9rem;
-            border-bottom: 1px solid rgba(100,255,218,0.1);
-        }
-
-        .section-label::before {
-            content: '';
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: #64ffda;
-            box-shadow: 0 0 8px #64ffda;
-            flex-shrink: 0;
-        }
-
         /* BIO: 2-col */
         .bio-grid {
             display: grid;
@@ -103,7 +29,7 @@
         .bio-text p { margin-bottom: 1.3rem; }
         .bio-text p:last-child { margin-bottom: 0; }
         .bio-text strong { color: #d8d8d8; font-weight: 500; }
-        .bio-text a { color: #64ffda; text-decoration: none; transition: opacity 0.2s; }
+        .bio-text a { color: #89ca78; text-decoration: none; transition: opacity 0.2s; }
         .bio-text a:hover { opacity: 0.75; }
 
         .highlight-item {
@@ -144,13 +70,13 @@
             transition: border-color 0.3s;
         }
 
-        .skills-block:hover { border-color: rgba(100,255,218,0.12); }
+        .skills-block:hover { border-color: rgba(199,146,234,0.18); }
 
         .skills-block-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.65rem;
             font-weight: 500;
-            color: #64ffda;
+            color: #c792ea;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             margin-bottom: 1rem;
@@ -159,9 +85,9 @@
         .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
         .tag {
-            background: rgba(100,255,218,0.05);
-            border: 1px solid rgba(100,255,218,0.1);
-            color: #aaa;
+            background: rgba(199,146,234,0.06);
+            border: 1px solid rgba(199,146,234,0.13);
+            color: #abb2bf;
             padding: 0.35rem 0.85rem;
             border-radius: 100px;
             font-size: 0.78rem;
@@ -171,9 +97,9 @@
         }
 
         .tag:hover {
-            background: rgba(100,255,218,0.1);
-            border-color: rgba(100,255,218,0.28);
-            color: #64ffda;
+            background: rgba(199,146,234,0.12);
+            border-color: rgba(199,146,234,0.32);
+            color: #c792ea;
             transform: translateY(-1px);
         }
 
@@ -192,7 +118,13 @@
 </head>
 
 <body>
-    <div id="particles-js"></div>
+    <div class="mesh-bg">
+        <div class="mesh-orb mesh-orb-1"></div>
+        <div class="mesh-orb mesh-orb-2"></div>
+        <div class="mesh-orb mesh-orb-3"></div>
+        <div class="mesh-orb mesh-orb-4"></div>
+        <div class="mesh-orb mesh-orb-5"></div>
+    </div>
 
     <nav class="top-nav">
         <a href="index.html" class="nav-link">Home</a>
@@ -213,11 +145,11 @@
             <div class="section-label">Background</div>
             <div class="bio-grid">
                 <div class="bio-text">
-                    <p>I'm Parboni Chattopadhyay, a recently graduated Informatics major with a Computer Science minor at UC Irvine. I'm a <strong>data-driven software engineer and aspiring product manager</strong> passionate about building human-centered applications that translate research and data insights into meaningful impact.</p>
+                    <p>I'm Parboni Chattopadhyay, a recently graduated Informatics major with a Computer Science minor at UC Irvine. I'm a data-driven </strong> software engineer and aspiring product manager</strong> passionate about building human-centered applications that translate research and data insights into meaningful impact.</p>
 
                     <p>My work spans full-stack development, LLM-assisted data analysis, and clinical research software. I engineered gamified cognitive assessment tools for a pediatric sleep research lab at UCI School of Medicine — work that earned <strong>2nd place nationally at the 2026 Capstone Design Conference (Texas A&M)</strong> and <strong>3rd place at the UCI ICS 2026 Senior Design Expo</strong>, and was <a href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank">featured in UCI ICS News</a>.</p>
 
-                    <p>I also conduct research on AI tool adoption among ICS students using LLM-assisted Codex pipelines — research accepted to <strong>ICCSE 2026</strong>. Previously I interned at Numecent and participated in the NASA L'Space Research Program. I'm interested in roles across software engineering, product management, and educational technology.</p>
+                    <p>I also conduct research on AI tool adoption among ICS students using LLM-assisted Codex pipelines — research accepted to <strong>ICCSE 2026</strong>. Previously I interned at Numecent and participated in the NASA L'Space Research Program. I'm interested in roles across software engineering, product management, educational technology, and opportunities that have a passion for innovative design.</p>
                 </div>
 
                 <div class="bio-highlights">
@@ -319,7 +251,6 @@
 
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

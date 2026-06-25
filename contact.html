@@ -7,143 +7,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact - Parboni Chattopadhyay</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
+        body { font-family: 'Inter', sans-serif; overflow-y: auto; }
+
+        .contact-lead {
+            font-size: 1rem;
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
         }
 
-        .contact-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 1rem auto;
-            max-width: 100%;
-            color: #e5e7ec;
-        }
-
+        /* Contact cards grid */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.2rem;
+            margin-top: 0.5rem;
         }
 
-        .contact-item {
+        .contact-card {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            transition: transform 0.3s ease;
+            gap: 1.2rem;
+            padding: 1.5rem 1.8rem;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
         }
 
-        .contact-item:hover {
-            transform: translateY(-5px);
+        .contact-card:hover {
+            border-color: rgba(236,72,153,0.3);
+            background: rgba(236,72,153,0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.3);
         }
 
         .contact-icon {
-            font-size: 1.5rem;
-            color: #64ffda;
+            font-size: 1.6rem;
+            flex-shrink: 0;
         }
 
-        .contact-link {
-            color: #e5e7ec;
-            text-decoration: none;
-            font-size: 1.1rem;
+        .contact-info {}
+
+        .contact-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #ec4899;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
         }
 
-        .contact-link:hover {
-            color: #64ffda;
+        .contact-value {
+            font-size: 0.92rem;
+            color: #dbd9c8;
+            font-weight: 400;
         }
 
-        .social-links {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+        /* Location note */
+        .location-note {
+            font-size: 0.82rem;
+            color: #555;
+            font-style: italic;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.04em;
+            margin-top: 1.6rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .social-link {
-            font-size: 1.5rem;
-            color: #e5e7ec;
-            transition: all 0.3s ease;
+        @media (max-width: 700px) {
+            .contact-grid { grid-template-columns: 1fr; }
         }
 
-        .social-link:hover {
-            color: #64ffda;
-            transform: translateY(-5px);
-        }
-
-        .contact-text {
-            text-align: center;
-            margin: 1.5rem 0;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
+        @media (max-width: 600px) {
+            .page-wrap { padding-top: 5rem; }
         }
     </style>
 </head>
 
 <body>
-    <div id="particles-js"></div>
-    <main class="main">
-        <div class="main-content">
-            <div class="contact-container">
-                <h1 class="name">Contact Me</h1>
-                
-                <div class="contact-section">
-                    <p class="contact-text">
-                        I'm always interested in new opportunities and collaborations. 
-                        Feel free to reach out to me through any of these platforms!
-                    </p>
+    <div class="mesh-bg">
+        <div class="mesh-orb mesh-orb-1"></div>
+        <div class="mesh-orb mesh-orb-2"></div>
+        <div class="mesh-orb mesh-orb-3"></div>
+        <div class="mesh-orb mesh-orb-4"></div>
+        <div class="mesh-orb mesh-orb-5"></div>
+    </div>
 
-                    <div class="contact-grid">
-                        <a href="mailto:parboni845@gmail.com" class="contact-item">
-                            <span class="contact-icon">📧</span>
-                            <span class="contact-link">parboni845@gmail.com</span>
-                        </a>
-                        
-                        <a href="tel:917-671-8590" class="contact-item">
-                            <span class="contact-icon">📱</span>
-                            <span class="contact-link">917-671-8590</span>
-                        </a>
-                        
-                        <a href="https://www.linkedin.com/in/parbonichattopadhyay" target="_blank" class="contact-item">
-                            <span class="contact-icon">💼</span>
-                            <span class="contact-link">LinkedIn</span>
-                        </a>
-                        
-                        <a href="https://github.com/parbonichattopadhyay" target="_blank" class="contact-item">
-                            <span class="contact-icon">💻</span>
-                            <span class="contact-link">GitHub</span>
-                        </a>
-                    </div>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
 
-                    <div class="contact-text" style="margin-top: 2rem;">
-                        Currently based in Irvine, California & New York, New York
-                    </div>
-                </div>
+    <div class="page-wrap">
 
-                <nav class="navigation">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="experience.html" class="nav-link">Experience</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
-            </div>
+        <div class="page-header">
+            <h1 class="page-title">Get In Touch</h1>
+            <p class="page-sub">Open to new opportunities &amp; collaborations</p>
         </div>
-    </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+        <div class="section">
+            <div class="section-label">Contact</div>
+            <p class="contact-lead">I'd love to connect! Reach out through any of these platforms.</p>
+
+            <div class="contact-grid">
+                <a href="mailto:parboni845@gmail.com" class="contact-card">
+                    <span class="contact-icon">📧</span>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">parboni845@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="tel:917-671-8590" class="contact-card">
+                    <span class="contact-icon">📱</span>
+                    <div class="contact-info">
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">917-671-8590</div>
+                    </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/parbonichattopadhyay" target="_blank" class="contact-card">
+                    <span class="contact-icon">💼</span>
+                    <div class="contact-info">
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">parbonichattopadhyay</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/parbonichattopadhyay" target="_blank" class="contact-card">
+                    <span class="contact-icon">💻</span>
+                    <div class="contact-info">
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value">parbonichattopadhyay</div>
+                    </div>
+                </a>
+            </div>
+
+            <p class="location-note">📍 Irvine, California &amp; New York, New York</p>
+        </div>
+
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

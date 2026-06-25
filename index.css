@@ -3,8 +3,8 @@
 /* === COLOR TOKENS (New Moon / Tania-inspired) === */
 :root {
     --bg:         #141920;
-    --bg-card:    rgba(255,255,255,0.025);
-    --bg-hover:   rgba(255,255,255,0.04);
+    --bg-card:    rgba(13,19,35,0.55);
+    --bg-hover:   rgba(13,19,35,0.65);
     --text:       #abb2bf;
     --text-dim:   #5c6370;
     --text-bright:#dbd9c8;
@@ -21,24 +21,78 @@
 /* === BASE === */
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg);
+    background: #0d1323;
     color: var(--text);
     overflow-x: hidden;
     line-height: 1.6;
 }
 
-/* === PARTICLES === */
-#particles-js {
+/* === MESH GRADIENT BACKGROUND === */
+.mesh-bg {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 0;
+    background: #0d1323;
+    overflow: hidden;
+}
+
+.mesh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(72px);
+    animation: meshFloat ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* Purple — top left */
+.mesh-orb-1 {
+    width: 72vw; height: 72vw;
+    background: radial-gradient(circle, rgba(124,58,237,0.65) 0%, transparent 65%);
+    top: -28%; left: -8%;
+    animation-duration: 22s;
+}
+/* Pink/magenta — bottom left */
+.mesh-orb-2 {
+    width: 62vw; height: 62vw;
+    background: radial-gradient(circle, rgba(236,72,153,0.6) 0%, transparent 65%);
+    bottom: -18%; left: -5%;
+    animation-duration: 27s;
+    animation-delay: -8s;
+}
+/* Cyan/teal — top right */
+.mesh-orb-3 {
+    width: 65vw; height: 65vw;
+    background: radial-gradient(circle, rgba(6,182,212,0.55) 0%, transparent 65%);
+    top: -12%; right: -12%;
+    animation-duration: 20s;
+    animation-delay: -5s;
+}
+/* Green — right */
+.mesh-orb-4 {
+    width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(16,185,129,0.5) 0%, transparent 65%);
+    bottom: 5%; right: -8%;
+    animation-duration: 30s;
+    animation-delay: -14s;
+}
+/* Orange/amber — center bottom */
+.mesh-orb-5 {
+    width: 58vw; height: 58vw;
+    background: radial-gradient(circle, rgba(249,115,22,0.42) 0%, transparent 65%);
+    bottom: -12%; right: 18%;
+    animation-duration: 18s;
+    animation-delay: -3s;
+}
+
+@keyframes meshFloat {
+    0%   { transform: translate(0, 0)      scale(1); }
+    100% { transform: translate(2vw, 3vh)  scale(1.06); }
 }
 
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0e1217; }
-::-webkit-scrollbar-thumb { background: rgba(137,202,120,0.3); border-radius: 4px; }
+::-webkit-scrollbar-track { background: #0d1323; }
+::-webkit-scrollbar-thumb { background: rgba(236,72,153,0.35); border-radius: 4px; }
 
 /* === NAVIGATION (shared pill links) === */
 .navigation {
