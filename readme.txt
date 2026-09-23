@@ -1,62 +1,36 @@
---Readme document for *author*--
+# Hi, I'm Parboni Chattopadhyay
 
-A reminder on academic integrity, as described in the syllabus.
+I just recently graduated from UC Irvine with a degree in Informatics specializing in human computer interaction and a minor in Computer Science. I am interested in building thoughtful, human-centered technology.
 
-In general, the course staff expects that you will look at code and examples from many online resources as part of the assignments, particularly to resolve syntax and understand frameworks. We expect that you'll use other libraries you find, and will even require it in some assignments. These practices are often critical to the work of developers today. The best developers are adept at interpreting the examples they see, customizing them to their specific situation, and citing their sources so they can find them later. We expect you to do the same.
+- Portfolio: [parbonichattopadhyay.github.io](https://parbonichattopadhyay.github.io)
+- LinkedIn: [linkedin.com/in/your-handle](https://linkedin.com/in/your-handle)
+- Email: your.email@example.com
 
-While learning from examples is encouraged, attempting to pass an existing project or example from the web as your own is not allowed. If you ever have a question about what is or is not appropriate, feel free to ask the course staff!
+## Featured Project
 
-Talking to classmates about class material, assignment requirements, etc. is a great way to verify ideas and get feedback. But this distinctly does *not* permit attempting to pass off someone else’s code as your own. Talking over ideas and approaches is allowed, but the work that you produce and submit must be your own.
+### [Health Harmonies](https://github.com/parbonichattopadhyay/HealthHarmonies)
+A music-based wellness platform that helps patients and clinicians manage stress through mood check-ins, personalized playlists, and guided journaling. As **Tech Lead** on a four-person team, I built the responsive web platform, informed by a user survey that shaped its design.
 
-1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
+[Live demo](https://parbonichattopadhyay.github.io/HealthHarmonies/) · [Figma prototype](https://www.figma.com/design/ZaNI78x4sbjkszn8UtmQXP/Health-Harmony)
 
-10/10
-- 1/1 Readme
-- 2/2 Basic HTML content
-- 1/1 Basic CSS styling
-- 1/1 Advanced feature
-- 2/2 Responsive layout
-- 1/1 Passes validation checks
-- 2/2 Embraces spirit of the assignment
+### [Personal Portfolio](https://github.com/parbonichattopadhyay/parbonichattopadhyay.github.io)
+A multi-page responsive portfolio with sidebar navigation, an interactive particles.js background, and a custom typing animation.
 
-2. What (a) basic features, (b) CSS features, and (c) advanced features did you include in your portfolio?
+Experience
 
-(a) Basic features
-Profile image with alt text
-Multiple linked pages (Home,About,Experience,Contact)
-Navigation between pages
-Semantic HTML tags
-Custom icons for sections
+Systems Intelligence Health Equity Research Group, North Jersey Management Solutions · New York, NY
+
+Built a secure Python desktop app for Windows that batch-converts PDFs of any size to page-level images and extracts their text through a zero-data-retention AI endpoint, cutting the time researchers spend reviewing and organizing documents.
+
+Encrypted credential storage, privacy-preserving audit logging, and stateless API requests with server-side storage disabled, so sensitive health documents stay on researchers' machines
+GitHub Actions CI/CD pipeline that automates Windows executable and installer builds for one-click releases
 
 
-(b) CSS features
-Custon color scheme with visual appeal
-Modified padding/margins for readibility
-Custom fonts with fallbacks
-Interactive hover effects
-Responsive design elements
+## Tech I Use
 
+Python · HTML5 · CSS3 (Grid, Flexbox) · JavaScript · particles.js · GitHub Actions (CI/CD) · Figma · Git & GitHub Pages HTML5 · CSS3 (Grid, Flexbox) · JavaScript · particles.js · Figma · Git & GitHub Pages
 
-(c) Advanced features
-Complex page layout with sidebar Navigation
-Interactive particle.js background
-Typing animation effects using a type function 
+## Currently
 
-
-
-3. How long, in hours, did it take you to complete this assignment?
-This assignment took me around 20 hours to complete in total with the research as well put into it. 
-
-
-4. What online resources did you consult when completing this assignment? (list specific URLs, describe queries to Generative AI, or use of AI-based code completion)
-I used Particle.js documentation: https://particles.js.org/ I used MDN Web docs for CSS Grid and FLexbox, I used Google Fonts, I used W3School for HTML Semantics.
- I used AI to help with some of the interactive aspects of JS. I also used Youtube to help. 
-
-
-5. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
-My friends in the class mainly about how to set up the workspace. 
-
-
-6. Is there anything special we need to know in order to run your code?
-Nope. 
-
+- Learning  
+- Looking for full time roles in NYC.
