@@ -3,8 +3,8 @@
 I just recently graduated from UC Irvine with a degree in Informatics specializing in human computer interaction and a minor in Computer Science. I am interested in building thoughtful, human-centered technology.
 
 - Portfolio: [parbonichattopadhyay.github.io](https://parbonichattopadhyay.github.io)
-- LinkedIn: [linkedin.com/in/your-handle](https://linkedin.com/in/your-handle)
-- Email: your.email@example.com
+- LinkedIn: [https://www.linkedin.com/in/parbonichattopadhyay/)
+- Email: parboni845@gmail.com
 
 ## Featured Project
 
