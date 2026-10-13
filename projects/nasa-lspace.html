@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NASA L’SPACE: Autonomous Plant Growth — Parboni Chattopadhyay</title>
+  <meta name="description" content="A NASA L'SPACE proposal for an autonomous ISS plant-growth system. Parboni led data visualization and frontend design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+  <style>
+    .ph.space { background: #23305E; color: #C9D6F0; }
+    .kpp { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .kpp th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: 0 12px 10px 0; border-bottom: 1.5px solid var(--ink); }
+    .kpp td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .kpp td:last-child { font-family: var(--serif); font-size: 18px; }
+    .table-wrap { grid-column: 1 / -1; overflow-x: auto; }
+    .doc-fig { background: #fff; padding: clamp(16px, 3vw, 40px); border: 1.5px solid var(--ink); }
+
+    /* scrollable paper viewer */
+    .paper { margin: 0; }
+    .paper-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; background: #23305E; color: #F5EADB; font-size: 13px; letter-spacing: .04em; }
+    .paper-title { font-family: var(--serif); font-size: 17px; letter-spacing: 0; }
+    .paper-count { font-variant-numeric: tabular-nums; padding: 3px 10px; border-radius: 999px; background: rgba(245,234,219,.14); white-space: nowrap; }
+    .paper-scroll {
+      height: min(78vh, 820px); overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y proximity;
+      display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 28px 16px;
+      background: #2E3A63 radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.5px) 0 0 / 18px 18px;
+    }
+    .paper-scroll:focus-visible { outline: 3px solid #F2C14E; outline-offset: -3px; }
+    .paper-page { display: block; width: min(100%, 720px); height: auto; scroll-snap-align: start; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    @media (max-width: 860px) { .paper-scroll { height: 70vh; padding: 20px 10px; } }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="../index.html" class="mark">PC</a>
+    <nav aria-label="Primary">
+      <a href="../index.html">Work</a>
+      <a href="../index.html">About</a>
+    </nav>
+    <a href="mailto:parboni845@gmail.com" class="contact">Contact</a>
+  </header>
+
+  <div class="layout">
+
+    <aside class="info">
+      <div class="info-body">
+        <h1>Growing plants in space without a gardener</h1>
+        <p class="summary">A NASA proposal for a plant-growth system on the International Space Station that waters itself. My team of ten paired a new porous growing material with a smart irrigation controller, so astronauts spend less time gardening and plants get steadier water and oxygen.</p>
+
+        <dl class="meta">
+          <div><dt>Program</dt><dd>NASA L’SPACE NPWEE</dd></div>
+          <div><dt>Role</dt><dd>Visualization &amp; data analytics</dd></div>
+          <div><dt>Time</dt><dd>~7 hrs / week</dd></div>
+          <div><dt>Team</dt><dd>10 students, 9 schools</dd></div>
+          <div><dt>Year</dt><dd>Fall 2025</dd></div>
+        </dl>
+      </div>
+
+      <a href="../index.html" class="close">Close</a>
+    </aside>
+
+    <main class="gallery">
+
+      <!-- HERO: scrollable excerpt of the proposal (contact details removed from page 1) -->
+      <figure class="full paper">
+        <div class="paper-bar">
+          <span class="paper-title">Proposal · pages 1–7 + Appendix C3</span>
+          <span class="paper-count" id="paper-count" aria-live="polite">Page 1</span>
+        </div>
+        <div class="paper-scroll" id="paper-scroll" tabindex="0" role="region" aria-label="Scrollable excerpt of the NASA proposal">
+          <img class="paper-page" src="images/lspace-paper/page-01.jpg" alt="Proposal page 1: Title, team and abstract" loading="eager" width="1105" height="1430" data-label="Page 1">
+          <img class="paper-page" src="images/lspace-paper/page-02.jpg" alt="Proposal page 2: Technology concept and goal" loading="lazy" width="1105" height="1430" data-label="Page 2">
+          <img class="paper-page" src="images/lspace-paper/page-03.jpg" alt="Proposal page 3: Bead substrate and limitations" loading="lazy" width="1105" height="1430" data-label="Page 3">
+          <img class="paper-page" src="images/lspace-paper/page-04.jpg" alt="Proposal page 4: State of the art and targets" loading="lazy" width="1105" height="1430" data-label="Page 4">
+          <img class="paper-page" src="images/lspace-paper/page-05.jpg" alt="Proposal page 5: Challenges, risks and work plan" loading="lazy" width="1105" height="1430" data-label="Page 5">
+          <img class="paper-page" src="images/lspace-paper/page-06.jpg" alt="Proposal page 6: Related technologies and timeline" loading="lazy" width="1105" height="1430" data-label="Page 6">
+          <img class="paper-page" src="images/lspace-paper/page-07.jpg" alt="Proposal page 7: Budget and team" loading="lazy" width="1105" height="1430" data-label="Page 7">
+          <img class="paper-page" src="images/lspace-paper/page-17.jpg" alt="Proposal page 17: Appendix C3, the RBC bead fabrication process table" loading="lazy" width="1105" height="1430" data-label="Appendix C3">
+        </div>
+        <figcaption>Scroll to read. Excerpt shared with contact details removed; references and team forms omitted.</figcaption>
+      </figure>
+
+      <section class="note">
+        <h2>The problem</h2>
+        <p>The ISS grows food in systems called Veggie and the Advanced Plant Habitat. Both rely on clay “pillows” that crew members water by hand. In microgravity, water doesn’t drain the way it does on Earth. It clings in thin films around roots, so some roots drown, others dry out, salt builds up and the crew loses hours to upkeep.</p>
+      </section>
+
+      <section class="note">
+        <h2>What we proposed</h2>
+        <p>Tiny porous beads, 1.2–1.8 mm across, made by dropping a mix of regolith simulant, biochar, zeolite and chitosan into liquid nitrogen. The air pockets keep roots breathing. A controller running on a Jetson Orin Nano reads moisture, pH, conductivity and flow sensors and adjusts watering on its own, using a hybrid of classic PID control and reinforcement learning.</p>
+      </section>
+
+      <figure class="full">
+        <img class="doc-fig" src="images/lspace-figures/appendix-c3_fabrication-process.png" alt="Table titled Appendix C3, RBC Fabrication Process, with four steps: 1 slurry preparation, 2 controlled extrusion into liquid nitrogen, 3 freeze-drying, 4 sieving beads to 1.2 to 1.8 millimeters. Each step lists a description and its purpose.">
+        <figcaption>Appendix C3, which I made: the four-step bead fabrication process, from mixing the slurry to sieving beads to 1.2–1.8 mm, with the purpose of each step.</figcaption>
+      </figure>
+
+      <section class="note">
+        <h2>My role</h2>
+        <p>I owned visualization and data analytics for the team, about 7 hours a week, and made many of the proposal’s graphs. My job was to take dense technical targets and comparisons with today’s ISS systems and turn them into charts reviewers could read at a glance. One of mine was Appendix C3, the fabrication process table, which breaks a lab procedure into four steps and pairs each one with why it matters.</p>
+      </section>
+
+      <section class="note">
+        <h2>Targets</h2>
+        <div class="table-wrap">
+          <table class="kpp">
+            <thead><tr><th>Measure</th><th>ISS today</th><th>Our target</th></tr></thead>
+            <tbody>
+              <tr><td>Moisture response time</td><td>3–12 hours (manual)</td><td>Under 5 minutes</td></tr>
+              <tr><td>Water-use efficiency</td><td>~70%</td><td>85%+</td></tr>
+              <tr><td>Autonomy</td><td>Under 30%</td><td>90%+</td></tr>
+              <tr><td>Readiness (TRL)</td><td>TRL 2</td><td>TRL 4 in 12 months, $10K</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <a href="../index.html" class="next">
+        <span>Back to</span>
+        <strong>Parboni’s desktop →</strong>
+      </a>
+    </main>
+  </div>
+
+
+  <script>
+    // update the page counter as the reader scrolls the proposal
+    (function () {
+      const box = document.getElementById('paper-scroll');
+      const count = document.getElementById('paper-count');
+      if (!box || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) count.textContent = e.target.dataset.label; });
+      }, { root: box, rootMargin: '-45% 0px -45% 0px' });
+      box.querySelectorAll('.paper-page').forEach((img) => io.observe(img));
+    })();
+  </script>
+</body>
+</html>

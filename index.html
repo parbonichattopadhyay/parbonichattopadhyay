@@ -1,352 +1,701 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Parboni Chattopadhyay">
-    <meta name="description" content="Personal portfolio website">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Parboni Chattopadhyay</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        body { overflow: hidden; }
-
-        /* === CANVAS BACKGROUND === */
-        #tech-canvas {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* === HERO === */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            padding: 2rem;
-        }
-
-        .hero-inner {
-            display: flex;
-            align-items: center;
-            gap: 5rem;
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        /* === PHOTO FRAME === */
-        .photo-frame {
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            inset: -10px;
-            border: 1px solid rgba(255, 111, 163, 0.35);
-            border-radius: 4px;
-            transform: rotate(3deg);
-            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), border-color 0.4s;
-        }
-
-        .photo-frame:hover::before {
-            transform: rotate(0deg);
-            border-color: rgba(255,111,163,0.7);
-        }
-
-        .photo-frame::after {
-            content: '';
-            position: absolute;
-            inset: -18px;
-            border: 1px solid rgba(199,146,234,0.15);
-            border-radius: 4px;
-            transform: rotate(-1.5deg);
-            transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), border-color 0.4s;
-        }
-
-        .photo-frame:hover::after {
-            transform: rotate(0deg);
-            border-color: rgba(199,146,234,0.35);
-        }
-
-        .profile-image {
-            width: 300px;
-            height: 380px;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
-            border-radius: 3px;
-            filter: none;
-            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), box-shadow 0.5s;
-            position: relative;
-            z-index: 1;
-        }
-
-        .photo-frame:hover .profile-image {
-            transform: scale(1.015);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 50px rgba(255,111,163,0.12);
-        }
-
-        /* === TEXT === */
-        .hero-text { flex: 1; }
-
-        .hero-label {
-            font-size: 0.68rem;
-            color: #ff6fa3;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            margin-bottom: 1.3rem;
-            font-family: 'Space Grotesk', sans-serif;
-            opacity: 0;
-            animation: fadeInUp 0.7s ease 0.1s forwards;
-        }
-
-        .name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 5.5vw, 5.5rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(24px);
-            animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
-            color: #ffffff;
-        }
-
-        .title {
-            font-size: 1.1rem;
-            color: #ff6fa3;
-            font-weight: 400;
-            min-height: 1.8em;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.35s forwards;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 0.9em;
-            background: #ff6fa3;
-            margin-left: 3px;
-            vertical-align: middle;
-            animation: blink 1s infinite;
-        }
-
-        .navigation { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-
-        /* === SCROLL BUTTON === */
-        .scroll-hint {
-            position: absolute;
-            bottom: 2.2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.1s forwards;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .scroll-hint span {
-            font-size: 0.6rem;
-            color: #ff6fa3;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 38px;
-            background: linear-gradient(to bottom, #ff6fa3, transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.4; transform: scaleY(1); }
-            50%       { opacity: 1;   transform: scaleY(1.08); }
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0; }
-        }
-
-        @media (max-width: 860px) {
-            .hero-inner { flex-direction: column; gap: 2.5rem; text-align: center; }
-            .profile-image { width: 220px; height: 280px; }
-            .navigation { justify-content: center; }
-        }
-
-        @media (max-width: 500px) {
-            .profile-image { width: 180px; height: 230px; }
-            .name { font-size: 2.6rem; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parboni’s Portfolio</title>
+  <meta name="description" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@200;300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="os.css">
 </head>
+<!-- TODO: put your email here once — the Messages window and copy buttons use it -->
+<body data-email="parboni845@gmail.com">
 
-<body>
-    <!-- Mesh gradient background -->
-    <div class="mesh-bg">
-        <div class="mesh-orb mesh-orb-1"></div>
-        <div class="mesh-orb mesh-orb-2"></div>
-        <div class="mesh-orb mesh-orb-3"></div>
-        <div class="mesh-orb mesh-orb-4"></div>
-        <div class="mesh-orb mesh-orb-5"></div>
+  <!-- ============================================================
+       MENU BAR
+       ============================================================ -->
+  <header class="menubar">
+    <div class="menubar-left">
+      <span class="logo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 9l-5.2 4.3L17.6 21 12 17.3 6.4 21l1.8-7.7L3 9l6.6-.4z" fill="currentColor"/></svg>
+      </span>
+      <strong class="menubar-name">parboni’s portfolio</strong>
+      <nav class="menubar-links" aria-label="Menu">
+        <button data-open="projects">Work</button>
+        <button data-open="about">About</button>
+        <button data-open="messages">Contact</button>
+        <button data-open="resume">Résumé</button>
+      </nav>
     </div>
+    <div class="menubar-right" aria-label="Status">
+      <span class="status-pill"><span class="dot" aria-hidden="true"></span>open to work</span>
+      <svg class="hide-sm mb-ico" width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M8 11.2l1.6-1.9a2.4 2.4 0 0 0-3.2 0z M3.2 6.4a7 7 0 0 1 9.6 0l-1.3 1.5a5 5 0 0 0-7 0z M.6 3.4a11 11 0 0 1 14.8 0l-1.3 1.5a9 9 0 0 0-12.2 0z" fill="currentColor"/></svg>
+      <svg class="hide-sm mb-ico" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="6" cy="6" r="4.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.2 9.2l3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <svg class="hide-sm mb-ico" width="16" height="14" viewBox="0 0 16 14" aria-hidden="true"><rect x=".8" y="1" width="14.4" height="5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12.6" cy="3.5" r="1.4" fill="currentColor"/><rect x=".8" y="8" width="14.4" height="5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="3.4" cy="10.5" r="1.4" fill="currentColor"/></svg>
+      <svg class="hide-sm" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true"><rect x="1" y="1" width="18" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="3" y="3" width="11" height="6" rx="1" fill="currentColor"/><rect x="20" y="4" width="1.6" height="4" rx=".8" fill="currentColor"/></svg>
+      <time id="menu-clock">--</time>
+    </div>
+  </header>
 
-    <!-- Canvas tech animation (sits above mesh) -->
-    <canvas id="tech-canvas"></canvas>
+  <!-- ============================================================
+       DESKTOP
+       Icons are placed with --x / --y (percent of the desk).
+       Click to open. Drag to move.
+       ============================================================ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <linearGradient id="mfBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E8CF2"/><stop offset="1" stop-color="#1663D6"/></linearGradient>
+    <linearGradient id="mfFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC6FF"/><stop offset="1" stop-color="#2F8EF0"/></linearGradient>
+  </defs></svg>
+  <main class="desk" id="desk">
 
-    <main class="hero">
-        <div class="hero-inner">
+    <p class="watermark" aria-hidden="true">parboni’s <em>portfolio</em></p>
 
-            <div class="photo-frame">
-                <img src="picture.png" alt="Parboni Chattopadhyay" class="profile-image">
-            </div>
+    <!-- ---------- blooming lilies (original drawings, animate on load) ---------- -->
+    <svg class="lily pink main" style="--x:61%; --h:96%; --t:0s; --mx:34%; --mh:72vh" viewBox="0 0 600 1000" aria-hidden="true">
+      <defs>
+        <linearGradient id="pA" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF5F7"/><stop offset=".22" stop-color="#F6B3C7"/><stop offset=".5" stop-color="#D9426F"/><stop offset=".78" stop-color="#F6B3C7"/><stop offset="1" stop-color="#FFF5F7"/></linearGradient>
+        <linearGradient id="pC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF8F1"/><stop offset=".22" stop-color="#F8C6A2"/><stop offset=".5" stop-color="#E57F4B"/><stop offset=".78" stop-color="#F8C6A2"/><stop offset="1" stop-color="#FFF8F1"/></linearGradient>
+        <linearGradient id="pD" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFC"/><stop offset=".22" stop-color="#FBF4E2"/><stop offset=".5" stop-color="#EBD6A6"/><stop offset=".78" stop-color="#FBF4E2"/><stop offset="1" stop-color="#FFFFFC"/></linearGradient>
+        <linearGradient id="pE" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FBF8FF"/><stop offset=".22" stop-color="#DAC9F3"/><stop offset=".5" stop-color="#9373CC"/><stop offset=".78" stop-color="#DAC9F3"/><stop offset="1" stop-color="#FBF8FF"/></linearGradient>
+        <linearGradient id="throat" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#DCE9A8"/><stop offset=".22" stop-color="#EEF3D4" stop-opacity=".85"/><stop offset=".42" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+        <linearGradient id="tipShade" x1="0" y1="1" x2="0" y2="0"><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3A0A1A" stop-opacity=".22"/></linearGradient>
+        <linearGradient id="stemG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3E5A2C"/><stop offset=".45" stop-color="#7C9B55"/><stop offset="1" stop-color="#2F4722"/></linearGradient>
+        <linearGradient id="leafG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7E9E57"/><stop offset=".5" stop-color="#4F6E35"/><stop offset="1" stop-color="#2E4521"/></linearGradient>
+        <linearGradient id="budG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8FAE62"/><stop offset=".5" stop-color="#C8D69A"/><stop offset=".85" stop-color="#E9A3B8"/><stop offset="1" stop-color="#D96A8E"/></linearGradient>
+        <radialGradient id="anther" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#E08A4E"/><stop offset=".6" stop-color="#A9441C"/><stop offset="1" stop-color="#6E2A10"/></radialGradient>
+      </defs>
+      <path class="stem" d="M330 1010 C 322 860, 300 720, 318 600 S 340 470, 332 400" fill="none" stroke="url(#stemG)" stroke-width="10" stroke-linecap="round"/>
+      <path class="leaf l1" d="M322 760 C 262 718, 186 700, 96 716 C 176 742, 252 758, 322 774 Z" fill="url(#leafG)"/><path class="leaf l1" d="M320 767 C 250 742, 170 724, 100 717" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l2" d="M318 640 C 382 596, 462 584, 552 594 C 476 624, 396 642, 320 656 Z" fill="url(#leafG)"/><path class="leaf l2" d="M320 648 C 392 620, 470 602, 548 595" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l3" d="M326 880 C 282 818, 218 786, 146 792 C 210 818, 268 852, 324 902 Z" fill="url(#leafG)"/><path class="leaf l3" d="M325 890 C 276 840, 214 806, 150 793" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l4" d="M324 820 C 380 772, 450 752, 520 760 C 452 786, 386 808, 326 836 Z" fill="url(#leafG)"/>
+      <g class="leaf l5"><path d="M318 560 C 300 540, 284 528, 262 520" fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round"/><g transform="translate(262 520) rotate(-58)"><path d="M0 0 C -15 -18, -14 -66, 0 -104 C 14 -66, 15 -18, 0 0 Z" fill="url(#budG)"/><path d="M0 -4 L0 -100 M-6 -10 C -8 -40, -6 -80, -2 -100" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1"/></g></g>
+      <g class="flower" transform="translate(332 400)">
+        <g class="bloom">
+          <g class="petal back" style="--a:-74deg; --d:0.1s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:-6deg; --d:0.2s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:62deg; --d:0.15s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="stamens"><path d="M0 -4 C -20 -50, -46 -83, -58 -118"/><path d="M0 -4 C -10 -50, -24 -98, -30 -140"/><path d="M0 -4 C -2 -50, -5 -105, -6 -150"/><path d="M0 -4 C 8 -50, 18 -102, 22 -146"/><path d="M0 -4 C 16 -50, 37 -90, 46 -128"/><path d="M0 -4 C 23 -50, 53 -73, 66 -104"/><ellipse cx="-58" cy="-120" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-63 -58 -120)"/><ellipse cx="-30" cy="-142" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-28 -30 -142)"/><ellipse cx="-6" cy="-152" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-32 -6 -152)"/><ellipse cx="22" cy="-148" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(33 22 -148)"/><ellipse cx="46" cy="-130" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(45 46 -130)"/><ellipse cx="66" cy="-106" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(42 66 -106)"/><path class="stigma" d="M0 -4 C 6 -60, 10 -120, 14 -168" style="stroke:#C9DC97; stroke-width:3.4"/><circle cx="14" cy="-171" r="6.5" fill="#B7CF79" style="fill:#B7CF79"/></g>
+          <g class="petal front" style="--a:-40deg; --d:0.35s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="8.7" cy="-85.9" rx="1.1" ry="1.4"/><ellipse cx="-2.3" cy="-102.9" rx="2.0" ry="1.4"/><ellipse cx="5.7" cy="-67.0" rx="1.3" ry="2.9"/><ellipse cx="-16.7" cy="-108.9" rx="1.0" ry="2.3"/><ellipse cx="-4.3" cy="-112.4" rx="1.3" ry="2.1"/><ellipse cx="-4.6" cy="-28.7" rx="1.6" ry="2.2"/><ellipse cx="-5.7" cy="-47.4" rx="1.3" ry="2.1"/><ellipse cx="-10.7" cy="-52.7" rx="2.1" ry="2.3"/><ellipse cx="-9.4" cy="-85.1" rx="2.3" ry="2.8"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:28deg; --d:0.45s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="-3.1" cy="-37.1" rx="1.9" ry="2.5"/><ellipse cx="-2.8" cy="-112.2" rx="2.1" ry="2.5"/><ellipse cx="2.0" cy="-53.9" rx="2.1" ry="2.8"/><ellipse cx="2.4" cy="-72.5" rx="1.0" ry="1.8"/><ellipse cx="-2.9" cy="-99.4" rx="1.2" ry="2.3"/><ellipse cx="5.5" cy="-90.7" rx="1.5" ry="2.1"/><ellipse cx="7.5" cy="-72.8" rx="1.7" ry="2.0"/><ellipse cx="-12.5" cy="-71.1" rx="1.1" ry="2.5"/><ellipse cx="3.5" cy="-116.5" rx="1.5" ry="1.7"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:90deg; --d:0.4s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="13.0" cy="-72.2" rx="2.0" ry="2.3"/><ellipse cx="-9.3" cy="-105.1" rx="1.7" ry="2.9"/><ellipse cx="-1.2" cy="-79.2" rx="1.4" ry="2.3"/><ellipse cx="-18.2" cy="-114.1" rx="2.0" ry="2.7"/><ellipse cx="8.5" cy="-107.5" rx="2.1" ry="2.2"/><ellipse cx="-2.1" cy="-77.6" rx="1.1" ry="2.8"/><ellipse cx="-8.5" cy="-78.4" rx="1.7" ry="2.2"/><ellipse cx="-3.7" cy="-58.8" rx="1.7" ry="2.4"/><ellipse cx="-1.2" cy="-82.3" rx="1.0" ry="1.8"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+        </g>
+      </g>
+    </svg>
+    <svg class="lily peach" style="--x:43%; --h:52%; --t:.9s;  --tilt:-6deg; --mx:-12%; --mh:52vh" viewBox="0 0 600 1000" aria-hidden="true">
+      <path class="stem" d="M330 1010 C 322 860, 300 720, 318 600 S 340 470, 332 400" fill="none" stroke="url(#stemG)" stroke-width="10" stroke-linecap="round"/>
+      <path class="leaf l1" d="M322 760 C 262 718, 186 700, 96 716 C 176 742, 252 758, 322 774 Z" fill="url(#leafG)"/><path class="leaf l1" d="M320 767 C 250 742, 170 724, 100 717" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l2" d="M318 640 C 382 596, 462 584, 552 594 C 476 624, 396 642, 320 656 Z" fill="url(#leafG)"/><path class="leaf l2" d="M320 648 C 392 620, 470 602, 548 595" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l3" d="M326 880 C 282 818, 218 786, 146 792 C 210 818, 268 852, 324 902 Z" fill="url(#leafG)"/><path class="leaf l3" d="M325 890 C 276 840, 214 806, 150 793" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l4" d="M324 820 C 380 772, 450 752, 520 760 C 452 786, 386 808, 326 836 Z" fill="url(#leafG)"/>
+      <g class="leaf l5"><path d="M318 560 C 300 540, 284 528, 262 520" fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round"/><g transform="translate(262 520) rotate(-58)"><path d="M0 0 C -15 -18, -14 -66, 0 -104 C 14 -66, 15 -18, 0 0 Z" fill="url(#budG)"/><path d="M0 -4 L0 -100 M-6 -10 C -8 -40, -6 -80, -2 -100" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1"/></g></g>
+      <g class="flower" transform="translate(332 400)">
+        <g class="bloom">
+          <g class="petal back" style="--a:-74deg; --d:0.1s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:-6deg; --d:0.2s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:62deg; --d:0.15s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="stamens"><path d="M0 -4 C -20 -50, -46 -83, -58 -118"/><path d="M0 -4 C -10 -50, -24 -98, -30 -140"/><path d="M0 -4 C -2 -50, -5 -105, -6 -150"/><path d="M0 -4 C 8 -50, 18 -102, 22 -146"/><path d="M0 -4 C 16 -50, 37 -90, 46 -128"/><path d="M0 -4 C 23 -50, 53 -73, 66 -104"/><ellipse cx="-58" cy="-120" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-22 -58 -120)"/><ellipse cx="-30" cy="-142" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-23 -30 -142)"/><ellipse cx="-6" cy="-152" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-67 -6 -152)"/><ellipse cx="22" cy="-148" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(24 22 -148)"/><ellipse cx="46" cy="-130" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(62 46 -130)"/><ellipse cx="66" cy="-106" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(57 66 -106)"/><path class="stigma" d="M0 -4 C 6 -60, 10 -120, 14 -168" style="stroke:#C9DC97; stroke-width:3.4"/><circle cx="14" cy="-171" r="6.5" fill="#B7CF79" style="fill:#B7CF79"/></g>
+          <g class="petal front" style="--a:-40deg; --d:0.35s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><g fill="#B04F25" opacity=".75"><ellipse cx="-5.9" cy="-87.6" rx="1.8" ry="2.4"/><ellipse cx="-9.8" cy="-79.5" rx="1.6" ry="2.0"/><ellipse cx="15.7" cy="-92.5" rx="2.2" ry="2.3"/><ellipse cx="-6.0" cy="-66.9" rx="1.0" ry="1.4"/><ellipse cx="-4.7" cy="-68.8" rx="1.5" ry="2.8"/><ellipse cx="1.7" cy="-74.4" rx="1.3" ry="1.4"/><ellipse cx="-8.4" cy="-55.9" rx="1.7" ry="3.0"/><ellipse cx="-9.8" cy="-88.1" rx="2.2" ry="2.7"/><ellipse cx="13.0" cy="-93.6" rx="2.0" ry="2.7"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:28deg; --d:0.45s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><g fill="#B04F25" opacity=".75"><ellipse cx="11.4" cy="-58.5" rx="2.3" ry="1.7"/><ellipse cx="7.0" cy="-95.4" rx="1.6" ry="2.2"/><ellipse cx="11.3" cy="-71.1" rx="1.7" ry="2.7"/><ellipse cx="9.1" cy="-58.6" rx="2.2" ry="2.1"/><ellipse cx="11.9" cy="-78.2" rx="1.9" ry="2.2"/><ellipse cx="-3.6" cy="-46.4" rx="1.9" ry="1.7"/><ellipse cx="-8.3" cy="-109.5" rx="2.2" ry="1.9"/><ellipse cx="7.6" cy="-114.1" rx="1.7" ry="2.2"/><ellipse cx="2.7" cy="-85.9" rx="1.4" ry="1.7"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:90deg; --d:0.4s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pC)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#B04F25" stroke-opacity=".25" stroke-width="1"/><g fill="#B04F25" opacity=".75"><ellipse cx="11.8" cy="-73.1" rx="1.8" ry="1.5"/><ellipse cx="7.7" cy="-101.5" rx="2.2" ry="1.7"/><ellipse cx="-14.2" cy="-94.5" rx="1.8" ry="1.8"/><ellipse cx="7.9" cy="-46.8" rx="1.1" ry="2.2"/><ellipse cx="-8.8" cy="-104.6" rx="1.3" ry="2.8"/><ellipse cx="5.5" cy="-64.9" rx="1.0" ry="2.0"/><ellipse cx="3.4" cy="-41.8" rx="1.1" ry="2.9"/><ellipse cx="3.8" cy="-28.3" rx="1.0" ry="1.8"/><ellipse cx="-11.6" cy="-100.8" rx="1.2" ry="2.5"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pC)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+        </g>
+      </g>
+    </svg>
+    <svg class="lily cream" style="--x:76%; --h:58%; --t:1.6s; --tilt:8deg;  --mx:62%;  --mh:46vh" viewBox="0 0 600 1000" aria-hidden="true">
+      <path class="stem" d="M330 1010 C 322 860, 300 720, 318 600 S 340 470, 332 400" fill="none" stroke="url(#stemG)" stroke-width="10" stroke-linecap="round"/>
+      <path class="leaf l1" d="M322 760 C 262 718, 186 700, 96 716 C 176 742, 252 758, 322 774 Z" fill="url(#leafG)"/><path class="leaf l1" d="M320 767 C 250 742, 170 724, 100 717" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l2" d="M318 640 C 382 596, 462 584, 552 594 C 476 624, 396 642, 320 656 Z" fill="url(#leafG)"/><path class="leaf l2" d="M320 648 C 392 620, 470 602, 548 595" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l3" d="M326 880 C 282 818, 218 786, 146 792 C 210 818, 268 852, 324 902 Z" fill="url(#leafG)"/><path class="leaf l3" d="M325 890 C 276 840, 214 806, 150 793" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l4" d="M324 820 C 380 772, 450 752, 520 760 C 452 786, 386 808, 326 836 Z" fill="url(#leafG)"/>
+      <g class="leaf l5"><path d="M318 560 C 300 540, 284 528, 262 520" fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round"/><g transform="translate(262 520) rotate(-58)"><path d="M0 0 C -15 -18, -14 -66, 0 -104 C 14 -66, 15 -18, 0 0 Z" fill="url(#budG)"/><path d="M0 -4 L0 -100 M-6 -10 C -8 -40, -6 -80, -2 -100" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1"/></g></g>
+      <g class="flower" transform="translate(332 400)">
+        <g class="bloom">
+          <g class="petal back" style="--a:-74deg; --d:0.1s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:-6deg; --d:0.2s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:62deg; --d:0.15s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="stamens"><path d="M0 -4 C -20 -50, -46 -83, -58 -118"/><path d="M0 -4 C -10 -50, -24 -98, -30 -140"/><path d="M0 -4 C -2 -50, -5 -105, -6 -150"/><path d="M0 -4 C 8 -50, 18 -102, 22 -146"/><path d="M0 -4 C 16 -50, 37 -90, 46 -128"/><path d="M0 -4 C 23 -50, 53 -73, 66 -104"/><ellipse cx="-58" cy="-120" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-58 -58 -120)"/><ellipse cx="-30" cy="-142" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-43 -30 -142)"/><ellipse cx="-6" cy="-152" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-52 -6 -152)"/><ellipse cx="22" cy="-148" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(50 22 -148)"/><ellipse cx="46" cy="-130" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(51 46 -130)"/><ellipse cx="66" cy="-106" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(23 66 -106)"/><path class="stigma" d="M0 -4 C 6 -60, 10 -120, 14 -168" style="stroke:#C9DC97; stroke-width:3.4"/><circle cx="14" cy="-171" r="6.5" fill="#B7CF79" style="fill:#B7CF79"/></g>
+          <g class="petal front" style="--a:-40deg; --d:0.35s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><g fill="#A88438" opacity=".75"><ellipse cx="5.5" cy="-27.2" rx="1.3" ry="1.8"/><ellipse cx="-1.1" cy="-117.6" rx="2.1" ry="2.2"/><ellipse cx="-10.5" cy="-84.8" rx="1.8" ry="2.8"/><ellipse cx="6.6" cy="-74.1" rx="1.9" ry="1.5"/><ellipse cx="3.0" cy="-95.8" rx="1.4" ry="1.4"/><ellipse cx="-1.0" cy="-105.6" rx="1.9" ry="2.8"/><ellipse cx="13.3" cy="-91.7" rx="1.5" ry="2.7"/><ellipse cx="11.2" cy="-66.9" rx="2.1" ry="1.6"/><ellipse cx="-5.4" cy="-38.5" rx="2.3" ry="2.1"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:28deg; --d:0.45s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><g fill="#A88438" opacity=".75"><ellipse cx="-5.9" cy="-83.7" rx="1.7" ry="2.0"/><ellipse cx="2.0" cy="-58.3" rx="1.8" ry="2.8"/><ellipse cx="13.2" cy="-88.7" rx="2.1" ry="3.0"/><ellipse cx="-10.3" cy="-87.8" rx="2.1" ry="2.9"/><ellipse cx="2.5" cy="-109.2" rx="1.9" ry="1.7"/><ellipse cx="2.5" cy="-102.5" rx="1.4" ry="1.5"/><ellipse cx="17.0" cy="-104.6" rx="1.1" ry="2.7"/><ellipse cx="-8.7" cy="-63.8" rx="1.4" ry="2.6"/><ellipse cx="-16.0" cy="-106.3" rx="1.8" ry="1.5"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:90deg; --d:0.4s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pD)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#A88438" stroke-opacity=".25" stroke-width="1"/><g fill="#A88438" opacity=".75"><ellipse cx="-5.4" cy="-92.1" rx="2.1" ry="3.0"/><ellipse cx="13.5" cy="-72.5" rx="1.4" ry="1.5"/><ellipse cx="-13.6" cy="-81.2" rx="1.3" ry="2.1"/><ellipse cx="-10.1" cy="-82.2" rx="1.1" ry="2.8"/><ellipse cx="10.5" cy="-54.9" rx="2.2" ry="2.0"/><ellipse cx="0.5" cy="-68.4" rx="1.8" ry="2.4"/><ellipse cx="3.4" cy="-77.5" rx="2.2" ry="2.2"/><ellipse cx="5.6" cy="-65.7" rx="1.3" ry="1.9"/><ellipse cx="0.8" cy="-116.0" rx="1.7" ry="1.4"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pD)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+        </g>
+      </g>
+    </svg>
+    <svg class="lily lavender extra" style="--x:1%;  --h:46%; --t:1.2s; --tilt:-4deg" viewBox="0 0 600 1000" aria-hidden="true">
+      <path class="stem" d="M330 1010 C 322 860, 300 720, 318 600 S 340 470, 332 400" fill="none" stroke="url(#stemG)" stroke-width="10" stroke-linecap="round"/>
+      <path class="leaf l1" d="M322 760 C 262 718, 186 700, 96 716 C 176 742, 252 758, 322 774 Z" fill="url(#leafG)"/><path class="leaf l1" d="M320 767 C 250 742, 170 724, 100 717" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l2" d="M318 640 C 382 596, 462 584, 552 594 C 476 624, 396 642, 320 656 Z" fill="url(#leafG)"/><path class="leaf l2" d="M320 648 C 392 620, 470 602, 548 595" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l3" d="M326 880 C 282 818, 218 786, 146 792 C 210 818, 268 852, 324 902 Z" fill="url(#leafG)"/><path class="leaf l3" d="M325 890 C 276 840, 214 806, 150 793" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l4" d="M324 820 C 380 772, 450 752, 520 760 C 452 786, 386 808, 326 836 Z" fill="url(#leafG)"/>
+      <g class="leaf l5"><path d="M318 560 C 300 540, 284 528, 262 520" fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round"/><g transform="translate(262 520) rotate(-58)"><path d="M0 0 C -15 -18, -14 -66, 0 -104 C 14 -66, 15 -18, 0 0 Z" fill="url(#budG)"/><path d="M0 -4 L0 -100 M-6 -10 C -8 -40, -6 -80, -2 -100" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1"/></g></g>
+      <g class="flower" transform="translate(332 400)">
+        <g class="bloom">
+          <g class="petal back" style="--a:-74deg; --d:0.1s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:-6deg; --d:0.2s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:62deg; --d:0.15s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="stamens"><path d="M0 -4 C -20 -50, -46 -83, -58 -118"/><path d="M0 -4 C -10 -50, -24 -98, -30 -140"/><path d="M0 -4 C -2 -50, -5 -105, -6 -150"/><path d="M0 -4 C 8 -50, 18 -102, 22 -146"/><path d="M0 -4 C 16 -50, 37 -90, 46 -128"/><path d="M0 -4 C 23 -50, 53 -73, 66 -104"/><ellipse cx="-58" cy="-120" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-58 -58 -120)"/><ellipse cx="-30" cy="-142" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-65 -30 -142)"/><ellipse cx="-6" cy="-152" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-50 -6 -152)"/><ellipse cx="22" cy="-148" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(28 22 -148)"/><ellipse cx="46" cy="-130" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(23 46 -130)"/><ellipse cx="66" cy="-106" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(40 66 -106)"/><path class="stigma" d="M0 -4 C 6 -60, 10 -120, 14 -168" style="stroke:#C9DC97; stroke-width:3.4"/><circle cx="14" cy="-171" r="6.5" fill="#B7CF79" style="fill:#B7CF79"/></g>
+          <g class="petal front" style="--a:-40deg; --d:0.35s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><g fill="#5A3B92" opacity=".75"><ellipse cx="10.8" cy="-110.5" rx="2.0" ry="1.8"/><ellipse cx="-6.2" cy="-75.4" rx="1.2" ry="1.6"/><ellipse cx="8.8" cy="-45.7" rx="2.1" ry="2.7"/><ellipse cx="-10.3" cy="-99.6" rx="1.4" ry="2.4"/><ellipse cx="11.3" cy="-93.3" rx="2.1" ry="1.5"/><ellipse cx="5.0" cy="-81.7" rx="1.7" ry="1.7"/><ellipse cx="-10.8" cy="-69.6" rx="2.2" ry="2.8"/><ellipse cx="-5.6" cy="-76.4" rx="2.2" ry="2.3"/><ellipse cx="12.3" cy="-107.2" rx="1.7" ry="2.1"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:28deg; --d:0.45s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><g fill="#5A3B92" opacity=".75"><ellipse cx="-2.0" cy="-81.1" rx="1.2" ry="1.9"/><ellipse cx="-15.4" cy="-100.8" rx="1.1" ry="2.4"/><ellipse cx="0.8" cy="-51.8" rx="1.6" ry="1.9"/><ellipse cx="-11.5" cy="-117.7" rx="1.5" ry="1.7"/><ellipse cx="-6.7" cy="-84.2" rx="1.5" ry="2.6"/><ellipse cx="1.3" cy="-55.5" rx="2.2" ry="1.6"/><ellipse cx="-4.7" cy="-31.7" rx="2.0" ry="2.4"/><ellipse cx="-3.6" cy="-47.8" rx="1.2" ry="2.1"/><ellipse cx="3.3" cy="-29.9" rx="2.2" ry="2.9"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:90deg; --d:0.4s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pE)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#5A3B92" stroke-opacity=".25" stroke-width="1"/><g fill="#5A3B92" opacity=".75"><ellipse cx="14.7" cy="-93.6" rx="1.0" ry="1.9"/><ellipse cx="10.2" cy="-114.9" rx="1.5" ry="2.9"/><ellipse cx="9.4" cy="-83.1" rx="1.4" ry="1.7"/><ellipse cx="-9.3" cy="-66.9" rx="1.5" ry="2.9"/><ellipse cx="-11.4" cy="-56.5" rx="1.1" ry="1.7"/><ellipse cx="-4.5" cy="-98.1" rx="1.4" ry="1.6"/><ellipse cx="-2.8" cy="-116.3" rx="1.3" ry="1.5"/><ellipse cx="-5.7" cy="-31.1" rx="1.9" ry="1.6"/><ellipse cx="-0.2" cy="-29.8" rx="1.3" ry="3.0"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pE)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+        </g>
+      </g>
+    </svg>
+    <svg class="lily pink small extra" style="--x:24%; --h:38%; --t:2.2s; --tilt:5deg" viewBox="0 0 600 1000" aria-hidden="true">
+      <path class="stem" d="M330 1010 C 322 860, 300 720, 318 600 S 340 470, 332 400" fill="none" stroke="url(#stemG)" stroke-width="10" stroke-linecap="round"/>
+      <path class="leaf l1" d="M322 760 C 262 718, 186 700, 96 716 C 176 742, 252 758, 322 774 Z" fill="url(#leafG)"/><path class="leaf l1" d="M320 767 C 250 742, 170 724, 100 717" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l2" d="M318 640 C 382 596, 462 584, 552 594 C 476 624, 396 642, 320 656 Z" fill="url(#leafG)"/><path class="leaf l2" d="M320 648 C 392 620, 470 602, 548 595" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l3" d="M326 880 C 282 818, 218 786, 146 792 C 210 818, 268 852, 324 902 Z" fill="url(#leafG)"/><path class="leaf l3" d="M325 890 C 276 840, 214 806, 150 793" fill="none" stroke="#B9CC8E" stroke-opacity=".6" stroke-width="1.4"/>
+      <path class="leaf l4" d="M324 820 C 380 772, 450 752, 520 760 C 452 786, 386 808, 326 836 Z" fill="url(#leafG)"/>
+      <g class="leaf l5"><path d="M318 560 C 300 540, 284 528, 262 520" fill="none" stroke="url(#stemG)" stroke-width="5" stroke-linecap="round"/><g transform="translate(262 520) rotate(-58)"><path d="M0 0 C -15 -18, -14 -66, 0 -104 C 14 -66, 15 -18, 0 0 Z" fill="url(#budG)"/><path d="M0 -4 L0 -100 M-6 -10 C -8 -40, -6 -80, -2 -100" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1"/></g></g>
+      <g class="flower" transform="translate(332 400)">
+        <g class="bloom">
+          <g class="petal back" style="--a:-74deg; --d:0.1s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:-6deg; --d:0.2s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal back" style="--a:62deg; --d:0.15s"><g transform="scale(.93)"><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="stamens"><path d="M0 -4 C -20 -50, -46 -83, -58 -118"/><path d="M0 -4 C -10 -50, -24 -98, -30 -140"/><path d="M0 -4 C -2 -50, -5 -105, -6 -150"/><path d="M0 -4 C 8 -50, 18 -102, 22 -146"/><path d="M0 -4 C 16 -50, 37 -90, 46 -128"/><path d="M0 -4 C 23 -50, 53 -73, 66 -104"/><ellipse cx="-58" cy="-120" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-39 -58 -120)"/><ellipse cx="-30" cy="-142" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-33 -30 -142)"/><ellipse cx="-6" cy="-152" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(-30 -6 -152)"/><ellipse cx="22" cy="-148" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(67 22 -148)"/><ellipse cx="46" cy="-130" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(57 46 -130)"/><ellipse cx="66" cy="-106" rx="4.2" ry="11" fill="url(#anther)" transform="rotate(66 66 -106)"/><path class="stigma" d="M0 -4 C 6 -60, 10 -120, 14 -168" style="stroke:#C9DC97; stroke-width:3.4"/><circle cx="14" cy="-171" r="6.5" fill="#B7CF79" style="fill:#B7CF79"/></g>
+          <g class="petal front" style="--a:-40deg; --d:0.35s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="-0.6" cy="-28.7" rx="2.2" ry="2.4"/><ellipse cx="-13.8" cy="-108.9" rx="1.6" ry="1.8"/><ellipse cx="2.1" cy="-76.0" rx="1.0" ry="1.7"/><ellipse cx="9.2" cy="-51.7" rx="2.0" ry="1.7"/><ellipse cx="-12.1" cy="-99.3" rx="1.8" ry="1.6"/><ellipse cx="5.9" cy="-26.2" rx="1.3" ry="1.7"/><ellipse cx="13.9" cy="-116.4" rx="1.4" ry="2.9"/><ellipse cx="4.9" cy="-75.6" rx="1.3" ry="2.9"/><ellipse cx="14.5" cy="-89.5" rx="2.2" ry="1.9"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:28deg; --d:0.45s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="-8.0" cy="-59.2" rx="1.2" ry="1.5"/><ellipse cx="2.3" cy="-53.7" rx="1.0" ry="2.5"/><ellipse cx="-4.4" cy="-57.1" rx="2.1" ry="2.2"/><ellipse cx="-0.4" cy="-55.1" rx="1.9" ry="1.5"/><ellipse cx="-17.8" cy="-115.7" rx="2.0" ry="2.8"/><ellipse cx="4.7" cy="-27.7" rx="1.5" ry="2.3"/><ellipse cx="-7.3" cy="-26.8" rx="1.2" ry="2.9"/><ellipse cx="5.2" cy="-44.1" rx="2.2" ry="2.9"/><ellipse cx="-3.4" cy="-57.7" rx="1.7" ry="2.6"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+          <g class="petal front" style="--a:90deg; --d:0.4s"><g transform=""><path class="pbase" d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#pA)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#throat)"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="url(#tipShade)"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -6 C -4 -70, -7 -150, 2 -228" fill="none" stroke="#9E1F4E" stroke-opacity=".25" stroke-width="1"/><g fill="#9E1F4E" opacity=".75"><ellipse cx="4.6" cy="-35.9" rx="2.0" ry="2.8"/><ellipse cx="7.5" cy="-29.4" rx="1.1" ry="1.9"/><ellipse cx="12.3" cy="-82.2" rx="1.4" ry="2.9"/><ellipse cx="-5.2" cy="-76.2" rx="1.4" ry="1.7"/><ellipse cx="-6.2" cy="-33.2" rx="1.9" ry="3.0"/><ellipse cx="-8.8" cy="-40.9" rx="2.3" ry="2.3"/><ellipse cx="-6.5" cy="-63.3" rx="1.8" ry="2.7"/><ellipse cx="-2.0" cy="-67.9" rx="1.1" ry="2.9"/><ellipse cx="-0.1" cy="-29.0" rx="2.1" ry="1.6"/></g><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="url(#pA)"/><path d="M4 -236 C 16 -228, 24 -214, 24 -200 C 15 -207, 9 -216, 1 -221 Z" fill="#3A0A1A" fill-opacity=".18"/><path d="M0 0 C -14 -28, -44 -78, -46 -128 C -48 -170, -26 -206, 4 -236 C 0 -214, 14 -178, 34 -132 C 50 -92, 22 -34, 0 0 Z" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2"/></g></g>
+        </g>
+      </g>
+    </svg>
 
-            <div class="hero-text">
-                <p class="hero-label">✦ Portfolio</p>
-                <h1 class="name">Hi! I'm Parboni :)</h1>
-                <p class="title"><span id="typed-text"></span><span class="cursor"></span></p>
-                <nav class="navigation">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="experience.html" class="nav-link">Experience</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
-            </div>
+    <!-- ---------- pinboard (replaces the widgets) ---------- -->
+    <section class="wgrid" aria-label="Highlights">
+      <button class="wd wd-photo" data-open="about" aria-label="Open about me">
+        <img src="images/me-graduation.jpg" alt="Parboni in her UC Irvine Class of 2026 stole under the Computer Science sign">
+        <span class="wd-over"><small>UC Irvine · Class of ’26</small><b>hi, I’m Parboni</b></span>
+      </button>
+
+      <button class="wd wd-paper" data-open="iccse" aria-label="Open research paper">
+        <span class="wd-label">Research paper</span>
+        <b class="wd-title">Student Perceptions and Attitudes Toward AI in Software Engineering Education</b>
+        <span class="wd-foot">IEEE ICCSE 2026 · co-author</span>
+      </button>
+
+      <a class="wd wd-news" href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener" aria-label="Read the UCI ICS News article (opens in a new tab)">
+        <span class="wd-label">In the news</span>
+        <b class="wd-title">Six ICS Students Compete in Capstone Competitions with Games Developed to Help Children Sleep</b>
+        <span class="wd-foot">UCI ICS News · read ↗</span>
+      </a>
+
+      <button class="wd wd-pvt" data-open="p1" aria-label="Open PVT Gamification project">
+        <img src="images/sleep-lab-poster.jpg" alt="">
+        <span class="wd-pvt-text">
+          <span class="wd-label">Featured project</span>
+          <b>PVT Gamification</b>
+          <span class="wd-badge">2nd Place · National Capstone Design Conference</span>
+        </span>
+      </button>
+    </section>
+
+    <!-- macOS-style desktop clock -->
+    <section class="deskclock" aria-label="Local time in New York">
+      <span id="dc-date" class="dc-date">Monday, October 12</span>
+      <time id="dc-time" class="dc-time">7:30</time>
+      <span class="dc-place">New York</span>
+    </section>
+    <!-- sticky note: tick things off -->
+    <section class="sticky notes-widget" aria-label="Notes: to do">
+      <header class="nw-head"><span class="nw-app" aria-hidden="true"><i></i></span>Notes</header>
+      <h2>To do</h2>
+      <p class="nw-meta">Today · 6 items</p>
+      <ul>
+          <li><label><input type="checkbox"><span>Land my dream engineering role</span></label></li>
+          <li><label><input type="checkbox" checked><span>Move to California</span></label></li>
+          <li><label><input type="checkbox" checked><span>Get published &amp; featured in an article</span></label></li>
+          <li><label><input type="checkbox"><span>Perfect my playlist</span></label></li>
+          <li><label><input type="checkbox"><span>Travel somewhere new</span></label></li>
+          <li><label><input type="checkbox"><span>Design something a million people use</span></label></li>
+      </ul>
+    </section>
+
+    <!-- loose pins on the desk -->
+
+    <!-- ---------- desktop icons ---------- -->
+    <button class="icon peek-below" data-open="about" style="--x:43%; --y:7%">
+      <span class="ico ico-photo" aria-hidden="true"><img src="images/me-headshot.jpg" alt=""></span>
+      <span class="label">me.jpg</span>
+    </button>
+
+    <button class="icon peek-below" data-open="p1" style="--x:54%; --y:7%">
+      <span class="ico is-folder mac-folder" aria-hidden="true">
+        <svg viewBox="0 0 80 64"><path d="M4 12a4 4 0 0 1 4-4h19.5a4 4 0 0 1 2.9 1.2L34 13h38a4 4 0 0 1 4 4v6H4z" fill="url(#mfBack)"/><rect x="8" y="14" width="64" height="16" rx="2" fill="#fff" opacity=".9"/><rect x="4" y="19" width="72" height="41" rx="5" fill="url(#mfFront)"/><path d="M9 19.5h62" stroke="#fff" stroke-opacity=".55"/><g class="mf-glyph" fill="currentColor" transform="translate(0 0)"><path d="M27 40a6 6 0 0 1 6-6h14a6 6 0 0 1 6 6v3a5 5 0 0 1-8.6 3.4L42 44h-4l-2.4 2.4A5 5 0 0 1 27 43z"/><circle cx="46" cy="39" r="1.5" fill="#BFE2FB"/><circle cx="49" cy="41.5" r="1.5" fill="#BFE2FB"/><rect x="31" y="38.3" width="7" height="2" rx="1" fill="#BFE2FB"/><rect x="33.5" y="35.8" width="2" height="7" rx="1" fill="#BFE2FB"/></g></svg>
+      </span>
+      </span>
+      <span class="label">PVT game</span>
+    
+      <span class="peek" aria-hidden="true"><img src="images/pvt-demo-tablets.jpg" alt="" loading="lazy"><b>PVT Gamification</b><small>2nd place nationally · Unity game</small></span>
+    </button>
+
+    <button class="icon peek-below" data-open="p3" style="--x:65%; --y:7%">
+      <span class="ico is-folder mac-folder" aria-hidden="true">
+        <svg viewBox="0 0 80 64"><path d="M4 12a4 4 0 0 1 4-4h19.5a4 4 0 0 1 2.9 1.2L34 13h38a4 4 0 0 1 4 4v6H4z" fill="url(#mfBack)"/><rect x="8" y="14" width="64" height="16" rx="2" fill="#fff" opacity=".9"/><rect x="4" y="19" width="72" height="41" rx="5" fill="url(#mfFront)"/><path d="M9 19.5h62" stroke="#fff" stroke-opacity=".55"/><g class="mf-glyph" fill="currentColor" transform="translate(0 0)"><path d="M36 33l12-3v13.5a3.5 3.5 0 1 1-2-3.2V34.5l-8 2v9a3.5 3.5 0 1 1-2-3.2z"/></g></svg>
+      </span>
+      </span>
+      <span class="label">HealthHarmonies</span>
+    
+      <span class="peek" aria-hidden="true"><img src="images/healthharmonies-site.jpg" alt="" loading="lazy"><b>HealthHarmonies</b><small>music + journaling for stress</small></span>
+    </button>
+
+    <button class="icon" data-open="p4" style="--x:54%; --y:33%">
+      <span class="ico is-folder mac-folder" aria-hidden="true">
+        <svg viewBox="0 0 80 64"><path d="M4 12a4 4 0 0 1 4-4h19.5a4 4 0 0 1 2.9 1.2L34 13h38a4 4 0 0 1 4 4v6H4z" fill="url(#mfBack)"/><rect x="8" y="14" width="64" height="16" rx="2" fill="#fff" opacity=".9"/><rect x="4" y="19" width="72" height="41" rx="5" fill="url(#mfFront)"/><path d="M9 19.5h62" stroke="#fff" stroke-opacity=".55"/><g class="mf-glyph" fill="currentColor" transform="translate(0 0)"><path d="M40 30a8 8 0 0 0-8 8c0 6 8 13 8 13s8-7 8-13a8 8 0 0 0-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></g></svg>
+      </span>
+      </span>
+      <span class="label">Zot Spot</span>
+    
+      <span class="peek" aria-hidden="true"><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/384/datas/gallery.jpg" alt="" loading="lazy"><b>Zot Spot</b><small>live campus map · hackathon</small></span>
+    </button>
+
+    <button class="icon" data-open="resume" style="--x:43%; --y:59%">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 64 76"><path d="M6 4h36l16 16v50a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#FFFDF8" stroke="#2A2320" stroke-width="2"/><path d="M42 4v16h16" fill="none" stroke="#2A2320" stroke-width="2"/><path d="M14 32h30M14 40h34M14 48h24" stroke="#C9BBAA" stroke-width="3" stroke-linecap="round"/><rect x="10" y="56" width="26" height="12" rx="3" fill="#C2412B"/><text x="23" y="65" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="8" fill="#FFFDF8">PDF</text></svg>
+      </span>
+      <span class="label">résumé.pdf</span>
+    </button>
+
+    <button class="icon" data-open="messages" style="--x:54%; --y:59%">
+      <span class="ico ico-app" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><defs><linearGradient id="gmd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9A4FF"/><stop offset="1" stop-color="#6A45E0"/></linearGradient></defs>
+          <rect x="4" y="4" width="92" height="92" rx="22" fill="url(#gmd)"/><rect x="4" y="4" width="92" height="46" rx="22" fill="#fff" opacity=".12"/>
+          <path d="M50 22c18 0 31 11 31 25S68 72 50 72c-4 0-7-.5-10-1.4L26 78l4-11c-7-5-11-12-11-20 0-14 13-25 31-25z" fill="#fff"/>
+          <circle cx="38" cy="47" r="4.2" fill="#6A45E0"/><circle cx="50" cy="47" r="4.2" fill="#6A45E0"/><circle cx="62" cy="47" r="4.2" fill="#6A45E0"/>
+          <circle cx="80" cy="20" r="11" fill="#FF3B30" stroke="#fff" stroke-width="3"/><text x="80" y="24.5" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-weight="700" font-size="13" fill="#fff">1</text></svg>
+      </span>
+      <span class="label">say hi</span>
+    </button>
+
+    
+
+    <button class="icon" data-open="nasa" style="--x:65%; --y:33%">
+      <span class="ico is-folder mac-folder" aria-hidden="true">
+        <svg viewBox="0 0 80 64"><path d="M4 12a4 4 0 0 1 4-4h19.5a4 4 0 0 1 2.9 1.2L34 13h38a4 4 0 0 1 4 4v6H4z" fill="url(#mfBack)"/><rect x="8" y="14" width="64" height="16" rx="2" fill="#fff" opacity=".9"/><rect x="4" y="19" width="72" height="41" rx="5" fill="url(#mfFront)"/><path d="M9 19.5h62" stroke="#fff" stroke-opacity=".55"/><g class="mf-glyph" fill="currentColor" transform="translate(0 0)"><circle cx="40" cy="40" r="7"/><ellipse cx="40" cy="40" rx="14" ry="4.5" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-20 40 40)"/></g></svg>
+      </span>
+      </span>
+      <span class="label">NASA L’SPACE</span>
+    
+      <span class="peek" aria-hidden="true"><img src="projects/images/lspace-figures/appendix-c3_fabrication-process.png" alt="" loading="lazy"><b>NASA L’SPACE</b><small>data viz for a NASA proposal</small></span>
+    </button>
+
+    <button class="icon" data-open="iccse" style="--x:43%; --y:33%">
+      <span class="ico is-folder mac-folder" aria-hidden="true">
+        <svg viewBox="0 0 80 64"><path d="M4 12a4 4 0 0 1 4-4h19.5a4 4 0 0 1 2.9 1.2L34 13h38a4 4 0 0 1 4 4v6H4z" fill="url(#mfBack)"/><rect x="8" y="14" width="64" height="16" rx="2" fill="#fff" opacity=".9"/><rect x="4" y="19" width="72" height="41" rx="5" fill="url(#mfFront)"/><path d="M9 19.5h62" stroke="#fff" stroke-opacity=".55"/><g class="mf-glyph" fill="currentColor" transform="translate(0 0)"><path d="M33 29h10l5 5v15a2 2 0 0 1-2 2H33a2 2 0 0 1-2-2V31a2 2 0 0 1 2-2z"/><path d="M35 38h9M35 42h9M35 46h6" stroke="#BFE2FB" stroke-width="1.6" stroke-linecap="round"/></g></svg>
+      </span>
+      </span>
+      <span class="label">research paper</span>
+    
+      <span class="peek" aria-hidden="true"><span class="peek-paper">Student Perceptions and Attitudes Toward AI in Software Engineering Education</span><b>Research paper</b><small>IEEE ICCSE 2026 · co-author</small></span>
+    </button>
+
+    <!-- ============================================================
+         WINDOWS — hidden until opened. Edit the text right here.
+         ============================================================ -->
+
+    <!-- ABOUT -->
+    <section class="win" id="win-about" role="dialog" aria-labelledby="t-about" hidden style="--tint:#F3A9B8; --w:640px">
+      <div class="win-bar">
+        <span class="win-title" id="t-about">about-me.txt</span>
+        <button class="win-close" aria-label="Close about">close ×</button>
+      </div>
+      <div class="win-body about-body">
+        <img class="about-img about-head" src="images/me-headshot.jpg" alt="Portrait of Parboni">
+        <div class="about-text">
+          <h2>Hi, I’m Parboni.</h2>
+          <p>I’m an <mark>interdisciplinary designer</mark> who loves making software and products that feel thoughtful, useful and a little bit joyful.</p>
+          <p>I work where design, research and engineering meet: listening to people, sketching ideas, building them out and refining until they <mark>just work</mark>.</p>
+          <p>Off the clock: making coffee, thrifting, and playing Minecraft.</p>
+          <ul class="facts">
+            <li><span>based in</span>New York, NY</li>
+            <li><span>studied</span>UC Irvine · B.S. Informatics (HCI), minor in CS · ’26</li>
+            <li><span>superpower</span>turning ideas into things people actually use</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (list of all work) -->
+    <section class="win" id="win-projects" role="dialog" aria-labelledby="t-projects" hidden style="--tint:#A9C1E8; --w:680px">
+      <div class="win-bar">
+        <span class="win-title" id="t-projects">work/</span>
+        <button class="win-close" aria-label="Close work">close ×</button>
+      </div>
+      <div class="win-body">
+        <table class="filelist">
+          <thead><tr><th>Name</th><th>Kind</th><th>Year</th></tr></thead>
+          <tbody>
+            <tr><td><button data-open="iccse"><i class="sw" style="background:#B9C8EC"></i>Research paper (ICCSE ’26)</button></td><td>Research &amp; data analysis</td><td>2026</td></tr>
+            <tr><td><button data-open="nasa"><i class="sw" style="background:#2C4A7A"></i>NASA L’SPACE proposal</button></td><td>Research &amp; visualization</td><td>2025</td></tr>
+            <tr><td><button data-open="p1"><i class="sw" style="background:#A9C1E8"></i>PVT Gamification · Sleep Lab</button></td><td>Game · UX research</td><td>2026</td></tr>
+            <tr><td><button data-open="p3"><i class="sw" style="background:#B9D3A8"></i>HealthHarmonies</button></td><td>Web · UX design</td><td>2026</td></tr>
+            <tr><td><button data-open="p4"><i class="sw" style="background:#F6D98A"></i>Zot Spot</button></td><td>Hackathon · web app</td><td>2025</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PROJECT 01 — copy this block for more projects (change p1 → p5 everywhere) -->
+    <section class="win" id="win-p1" role="dialog" aria-labelledby="t-p1" hidden style="--tint:#A9C1E8; --w:720px">
+      <div class="win-bar">
+        <span class="win-title" id="t-p1">pvt-gamification/</span>
+        <button class="win-close" aria-label="Close PVT Gamification">close ×</button>
+      </div>
+      <div class="win-body">
+        <img src="images/pvt-demo-tablets.jpg" alt="Parboni and two teammates holding iPads running the PVT game at the ICS Project Expo">
+        <span class="mini">Pediatric Sleep Research Lab · UC Irvine School of Medicine · 2026</span>
+        <h2>PVT Gamification</h2>
+        <ul class="chips"><li>Unity</li><li>C#</li><li>Figma</li><li>usability testing</li></ul>
+
+        <div class="awards">
+          <span class="award gold">2nd Place, National Capstone Design Conference 2026 · Student Poster, Texas A&amp;M</span>
+          <span class="award">3rd Place, Informatics · UCI ICS Student Project Expo 2026</span>
+          <a class="award award-link" href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener">Featured in UCI ICS News (2026) ↗</a>
         </div>
 
-        <a class="scroll-hint" href="about.html">
-            <span>Explore</span>
-            <div class="scroll-line"></div>
+        <div class="reels">
+          <figure class="phone-video">
+            <video src="images/pvt-basketball.mp4" poster="images/pvt-basketball-poster.jpg" controls muted playsinline loop preload="none" aria-label="Gameplay recording of the basketball round of the PVT game"></video>
+            <figcaption>Basketball round</figcaption>
+          </figure>
+          <figure class="phone-video">
+            <video src="images/pvt-golf.mp4" poster="images/pvt-golf-poster.jpg" controls muted playsinline loop preload="none" aria-label="Gameplay recording of the golf round of the PVT game"></video>
+            <figcaption>Golf round</figcaption>
+          </figure>
+          <figure class="phone-video">
+            <video src="images/pvt-tennis.mp4" poster="images/pvt-tennis-poster.jpg" controls muted playsinline loop preload="none" aria-label="Gameplay recording of the tennis round of the PVT game"></video>
+            <figcaption>Tennis round</figcaption>
+          </figure>
+        </div>
+        <dl class="story">
+            <div><dt>problem</dt><dd>The Psychomotor Vigilance Task (PVT) measures attention by having people tap when a red dot appears. It’s repetitive, so participants, especially kids, lose focus and stop complying.</dd></div>
+            <div><dt>what we built</dt><dd>Sports-themed games (basketball, golf, tennis, darts, soccer and more) that keep the PVT’s scientific structure: a sudden visual cue at random intervals. Every tap is logged with reaction time and sent to the researchers.</dd></div>
+            <div><dt>what I did</dt><dd>Built the Unity/C# cognitive-assessment game from clinical requirements, and refined age-appropriate interfaces with clinicians through iterative usability testing with 30+ users.</dd></div>
+            <div><dt>team</dt><dd>Six students, in partnership with Dr. Katharine Simon’s SLEEP Lab.</dd></div>
+          </dl>
+      
+
+        <blockquote class="quote">
+          <p>“What they’re creating is what we will be using in research with kids.”</p>
+          <cite>Dr. Katharine Simon, Assistant Professor of Pediatrics and director of the SLEEP Lab, in UC Irvine School of Medicine News</cite>
+        </blockquote>
+
+        <h3 class="sub">In the news</h3>
+        <ul class="press">
+          <li><a href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener"><span class="mini">UCI ICS News · May 18, 2026</span><strong>Six ICS Students Compete in Capstone Competitions with Games Developed to Help Children Sleep</strong><span class="press-go">↗</span></a></li>
+          <li><a href="https://medschool.uci.edu/news/informatics-students-partner-pediatrics-professor-gamify-sleep-loss-test" target="_blank" rel="noopener"><span class="mini">UC Irvine School of Medicine · May 20, 2026</span><strong>Informatics Students Partner with Pediatrics Professor to Gamify Sleep-Loss Test</strong><span class="press-go">↗</span></a></li>
+        </ul>
+        <h3 class="sub">From the expo floor</h3>
+        <div class="gallery" tabindex="0" role="region" aria-label="Photos from the project expo and awards, scroll sideways">
+          <figure><img src="images/sleep-lab-poster.jpg" alt="Parboni beside the PVT Gamification poster at the Capstone Design Conference" loading="lazy"><figcaption>Presenting our poster at Capstone Design</figcaption></figure>
+          <figure><img src="images/pvt-team-poster.jpg" alt="The six-person team holding the UCI Sleep Lab PVT Gamification poster" loading="lazy"><figcaption>The team with our poster</figcaption></figure>
+          <figure><img src="images/pvt-expo-stage.jpg" alt="The team on stage under the 2026 ICS Project Expo banner, holding an award folder" loading="lazy"><figcaption>On stage at the 2026 ICS Project Expo</figcaption></figure>
+          <figure class="cert"><img src="images/pvt-cert-capstone-2nd.jpg" alt="Certificate: Capstone Design Conference 2026, Student Poster 2nd Place, Gamification of Psychomotor Vigilance Task, University of California, Irvine" loading="lazy"><figcaption>Capstone Design Conference · 2nd Place</figcaption></figure>
+          <figure class="cert"><img src="images/pvt-cert-ics-3rd.jpg" alt="Certificate: UCI ICS Student Project Expo, 3rd Place Prize, Informatics, June 4 2026" loading="lazy"><figcaption>ICS Project Expo · 3rd Place</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+        <section class="win" id="win-p3" role="dialog" aria-labelledby="t-p3" hidden style="--tint:#B9D3A8; --w:760px">
+      <div class="win-bar">
+        <span class="win-title" id="t-p3">healthharmonies/</span>
+        <button class="win-close" aria-label="Close HealthHarmonies">close ×</button>
+      </div>
+      <div class="win-body">
+        <span class="mini">Music &amp; Health · UC Irvine · March 2026</span>
+        <h2>HealthHarmonies</h2>
+        <ul class="chips"><li>Figma</li><li>HTML/CSS</li><li>JavaScript</li><li>WCAG 2.1 AA</li><li>mobile-first</li></ul>
+        <dl class="story">
+          <div><dt>problem</dt><dd>Music therapy helps with stress, anxiety and pain, but it needs a certified therapist, so it isn’t available to everyone who could use it.</dd></div>
+          <div><dt>solution</dt><dd>A web platform that pairs personalized music with guided journaling: a quick mood and stress check-in, playlists matched to how you feel, and reflection prompts afterward.</dd></div>
+          <div><dt>what I did</dt><dd>Designed responsive, mobile-first interfaces using HCI principles and Figma prototyping, built to meet WCAG 2.1 AA accessibility standards.</dd></div>
+        </dl>
+
+        <div class="live-demo" data-src="https://parbonichattopadhyay.github.io/HealthHarmonies/" data-title="HealthHarmonies live site">
+          <div class="live-bar">
+            <span class="live-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="live-url">parbonichattopadhyay.github.io/HealthHarmonies</span>
+            <a class="live-open" href="https://parbonichattopadhyay.github.io/HealthHarmonies/" target="_blank" rel="noopener">open in new tab ↗</a>
+          </div>
+          <div class="live-stage">
+            <button class="live-start" type="button">
+              <span class="live-play" aria-hidden="true">▶</span>
+              <span><strong>Explore HealthHarmonies</strong><br><span class="mini">Scroll and click around the real site</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="https://parbonichattopadhyay.github.io/HealthHarmonies/" target="_blank" rel="noopener">Visit the site ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="win" id="win-p4" role="dialog" aria-labelledby="t-p4" hidden style="--tint:#F6D98A; --w:760px">
+      <div class="win-bar">
+        <span class="win-title" id="t-p4">zot-spot/</span>
+        <button class="win-close" aria-label="Close Zot Spot">close ×</button>
+      </div>
+      <div class="win-body">
+        <!-- Screenshot from the team's Devpost page. To keep it from ever breaking, save it to images/ and point src there. -->
+        <img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/384/datas/gallery.jpg" alt="Zot Spot map view showing UC Irvine restrooms with free period products marked on a campus map" onerror="this.style.display='none'">
+        <span class="mini">VenusHacks 2025 · February 2025 · 6th place</span>
+        <h2>Zot Spot</h2>
+        <ul class="chips"><li>Angular</li><li>TypeScript</li><li>Node.js</li><li>REST APIs</li></ul>
+        <dl class="story">
+          <div><dt>problem</dt><dd>UC Irvine students couldn’t tell which campus restrooms stocked free period products, or whether they were actually in stock.</dd></div>
+          <div><dt>what we built</dt><dd>A real-time menstrual-product availability platform, built with a six-person team: a campus map that finds the nearest stocked restroom, live pad and tampon stock levels, and quick reports when supplies run low.</dd></div>
+          <div><dt>what I did</dt><dd>Developed Angular/TypeScript views for location-based inventory, integrated with Node.js low-stock alerts.</dd></div>
+          <div><dt>outcome</dt><dd>Placed 6th at VenusHacks.</dd></div>
+        </dl>
+        <!-- live demo: loads only when the visitor clicks, so the free server isn't woken for every page view -->
+        <div class="live-demo" data-src="https://venushacks-1.onrender.com/" data-title="Zot Spot live demo">
+          <div class="live-bar">
+            <span class="live-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="live-url">venushacks-1.onrender.com</span>
+            <a class="live-open" href="https://venushacks-1.onrender.com/" target="_blank" rel="noopener">open in new tab ↗</a>
+          </div>
+          <div class="live-stage">
+            <button class="live-start" type="button">
+              <span class="live-play" aria-hidden="true">▶</span>
+              <span><strong>Try Zot Spot live</strong><br><span class="mini">Free server, so it can take up to a minute to wake up</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="https://devpost.com/software/zot-spot" target="_blank" rel="noopener">See it on Devpost ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICCSE PAPER -->
+    <section class="win" id="win-iccse" role="dialog" aria-labelledby="t-iccse" hidden style="--tint:#B9C8EC; --w:640px">
+      <div class="win-bar">
+        <span class="win-title" id="t-iccse">research-paper/</span>
+        <button class="win-close" aria-label="Close ICCSE paper">close ×</button>
+      </div>
+      <div class="win-body">
+        <div class="paper-cover">
+          <span class="mini">IEEE ICCSE 2026 · Budapest, Hungary</span>
+          <p class="paper-title">Student Perceptions and Attitudes Toward Artificial Intelligence in Software Engineering Education at an R1 University</p>
+          <p class="paper-authors">Hadar Ziv, Eden Radulescu, <strong>Parboni Chattopadhyay</strong>, Alaa Malabeh, Mahika Chimata, Aanya Agrawal, Sijie Guo, Alberto Krone-Martins</p>
+        </div>
+        <details class="abstract" open>
+          <summary>Abstract</summary>
+          <p>This paper presents a large-scale survey study examining undergraduate students’ perceptions and use of generative AI and large language models in software engineering and computing coursework. The dataset enables an analysis of students’ academic standing in their CS program, other key demographics, and a fine-grained examination of potential correlations between their student status and their perceptions of AI. Using established methods and an innovative embedding-space-based analysis approach to analyse close- and open-ended questions together, we identify multiple statistically significant relationships between student characteristics and their views on and use of AI and LLMs. Our analysis reveals several meaningful and significant findings, including (1) students in lower-division courses displayed different views and patterns than their upper-division counterparts; (2) students in introductory computing courses demonstrated differentiated perceptions of AI; and (3) students participating in upper-division capstone courses reported more specialized and purposeful uses of AI and LLMs, thus reflecting the more advanced needs of senior capstone projects. Our findings offer insights for CS educators seeking to understand student engagement with AI in college learning environments, suggesting that perceptions and use of AI are not uniform across the student population but vary significantly with academic maturity and context. This work can further inform pedagogical practices and suggest avenues for future research on the growing importance of AI and LLMs in CS education.</p>
+        </details>
+        <span class="mini">Publication · Co-author · UC Irvine Informatics</span>
+        <h2>How do students really feel about AI in class?</h2>
+        <ul class="chips"><li>survey research</li><li>data analysis</li><li>LLM-assisted coding</li></ul>
+        <dl class="story">
+          <div><dt>question</dt><dd>Do computing students’ views on generative AI and LLMs change with how far along they are in their degree?</dd></div>
+          <div><dt>the data</dt><dd>A survey of 1,228 UC Irvine undergraduates in Spring 2024, mixing rating-scale and open-ended questions.</dd></div>
+          <div><dt>my role</dt><dd>Built the Python/Pandas pipelines that cleaned the survey data, coded open-ended answers with LLM help using a codebook, and ran the statistics (chi-squared tests and Cramér’s V).</dd></div>
+          <div><dt>findings</dt><dd>Views on AI aren’t uniform: lower- and upper-division students see it differently, and capstone students use it in more specialized, purposeful ways.</dd></div>
+        </dl>
+        <!-- TODO: when the paper appears on IEEE Xplore, swap this link for its DOI and delete the note below -->
+        <a class="btn" href="https://www.ieee-iccse.org/" target="_blank" rel="noopener">About the conference ↗</a>
+        <p class="mini" style="margin:10px 0 0">Proceedings forthcoming on IEEE Xplore</p>
+      </div>
+    </section>
+
+    <!-- NASA L'SPACE -->
+    <section class="win" id="win-nasa" role="dialog" aria-labelledby="t-nasa" hidden style="--tint:#9DB4DE; --w:640px">
+      <div class="win-bar">
+        <span class="win-title" id="t-nasa">nasa-lspace/</span>
+        <button class="win-close" aria-label="Close NASA L’SPACE">close ×</button>
+      </div>
+      <div class="win-body">
+        <!-- Swap for <img src="projects/images/lspace-cover.jpg" alt="…"> once you pick a visual -->
+        <div class="cover cover-space" aria-hidden="true">
+          <svg viewBox="0 0 320 180" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="180" fill="#23305E"/>
+            <g fill="#FFFDF8"><circle cx="30" cy="30" r="1.4"/><circle cx="80" cy="140" r="1.1"/><circle cx="140" cy="24" r="1.2"/><circle cx="250" cy="150" r="1.4"/><circle cx="290" cy="36" r="1.1"/><circle cx="200" cy="60" r="0.9"/><circle cx="56" cy="92" r="0.9"/></g>
+            <ellipse cx="160" cy="98" rx="104" ry="30" fill="none" stroke="#F2C14E" stroke-width="2.5" transform="rotate(-10 160 98)"/>
+            <path d="M160 128c0-26 0-40 0-52" stroke="#5F8A63" stroke-width="4" stroke-linecap="round"/>
+            <path d="M160 92c-14-4-22-14-22-26 12 0 20 8 22 20z" fill="#7FB07F"/>
+            <path d="M160 82c12-4 20-14 20-26-12 0-19 8-20 20z" fill="#9DCB8F"/>
+            <g fill="#E9D7BF" stroke="#2A2320" stroke-width="1"><circle cx="138" cy="134" r="7"/><circle cx="152" cy="138" r="7"/><circle cx="166" cy="137" r="7"/><circle cx="180" cy="133" r="7"/><circle cx="145" cy="124" r="6"/><circle cx="173" cy="124" r="6"/></g>
+            <text x="16" y="168" font-family="Space Mono, monospace" font-size="9" fill="#C9D6F0">RBC cryo-aerogel beads · autonomous irrigation</text>
+          </svg>
+        </div>
+        <span class="mini">NASA L’SPACE NPWEE · Team 4 · Fall 2025</span>
+        <h2>Growing plants in space without a gardener</h2>
+        <ul class="chips"><li>data visualization</li><li>data analytics</li><li>charts &amp; graphs</li></ul>
+        <dl class="story">
+          <div><dt>problem</dt><dd>Plant systems on the ISS rely on manual watering and passive wicking, which leads to uneven moisture, salt buildup, oxygen-starved roots and hours of crew time.</dd></div>
+          <div><dt>proposal</dt><dd>Porous “cryo-aerogel” beads made from regolith simulant, biochar and chitosan, paired with a self-adjusting irrigation controller that reads moisture, pH and flow in real time.</dd></div>
+          <div><dt>my role</dt><dd>Visualization &amp; data analytics (~7 hrs/week) on a 10-person team from nine schools. I made many of the proposal’s graphs, turning sensor targets and system comparisons into charts NASA reviewers could read at a glance.</dd></div>
+          <div><dt>targets</dt><dd>Moisture response from 3–12 hours to under 5 minutes, water-use efficiency from ~70% to 85%+, TRL 2 → 4 on a $10K budget.</dd></div>
+        </dl>
+        <a class="btn" href="projects/nasa-lspace.html">Open full case study ↗</a>
+      </div>
+    </section>
+
+    <!-- RÉSUMÉ -->
+    <section class="win" id="win-resume" role="dialog" aria-labelledby="t-resume" hidden style="--tint:#E7DED1; --w:720px">
+      <div class="win-bar">
+        <span class="win-title" id="t-resume">résumé.pdf</span>
+        <button class="win-close" aria-label="Close résumé">close ×</button>
+      </div>
+      <div class="win-body resume-body">
+
+        <header class="cv-head">
+          <div>
+            <h2 id="cv-name">Parboni Chattopadhyay</h2>
+            <p class="cv-role">Designer &amp; software engineer · HCI + CS · New York, NY</p>
+          </div>
+          <span class="cv-open"><i aria-hidden="true"></i>Open to UX engineering, product design &amp; software roles</span>
+        </header>
+
+        <!-- proof first: the four things a hiring manager should see in 5 seconds -->
+        <ul class="cv-stats" aria-label="Highlights">
+          <li><strong>2nd</strong><span>National Capstone Design Conference ’26</span></li>
+          <li><strong>ICCSE ’26</strong><span>Co-authored research paper</span></li>
+          <li><strong>1,200+</strong><span>Survey responses analyzed with LLM-assisted coding</span></li>
+          <li><strong>98%</strong><span>Faster enterprise deployments at Numecent</span></li>
+        </ul>
+
+        <h3 class="sub">Experience</h3>
+        <ol class="cv-jobs">
+          <li>
+            <span class="cv-when">2026 – now</span>
+            <div><strong>Software Engineer &amp; LLM Product Manager</strong> <span class="cv-org">· Healthcare research group (contract)</span>
+              <p>Leading product <i>and</i> engineering for an internal AI tool: I scope it with researchers, design it, build it and ship every release, <b>owning the full lifecycle solo</b>.</p></div>
+          </li>
+          <li>
+            <span class="cv-when">2026</span>
+            <div><strong>Research Software Engineer</strong> <span class="cv-org">· Pediatric Sleep Research Lab, UCI School of Medicine</span>
+              <p>Built a Unity/C# cognitive-assessment game from clinical requirements and tested it with 30+ users. It won <b>2nd place nationally</b>.</p></div>
+          </li>
+          <li>
+            <span class="cv-when">2025</span>
+            <div><strong>Systems Engineer</strong> <span class="cv-org">· NASA L’SPACE</span>
+              <p>Owned visualization and data analytics for a 10-person NASA mission proposal.</p></div>
+          </li>
+          <li>
+            <span class="cv-when">2025</span>
+            <div><strong>Software Engineering Intern</strong> <span class="cv-org">· Numecent</span>
+              <p>Built C++/Win32 deployment tooling and cut firewall-rule deploys from seconds to milliseconds (<b>98%+ faster</b>).</p></div>
+          </li>
+          <li>
+            <span class="cv-when">2024 – now</span>
+            <div><strong>Research Software Engineer</strong> <span class="cv-org">· AI/LLM Education Impact Research, UCI</span>
+              <p>Built Python data pipelines and LLM-assisted coding for 1,200+ survey responses, which became an <b>ICCSE ’26 paper</b>.</p></div>
+          </li>
+          <li>
+            <span class="cv-when">2024 – 2026</span>
+            <div><strong>Software Engineering Grader</strong> <span class="cv-org">· UC Irvine</span>
+              <p>Reviewed 200+ Python projects a quarter for code quality and design.</p></div>
+          </li>
+        </ol>
+
+        <h3 class="sub">Skills</h3>
+        <dl class="cv-skills">
+          <div><dt>Design</dt><dd><span>Figma</span><span>Prototyping</span><span>Usability testing</span><span>WCAG 2.1 AA</span><span>Requirements analysis</span></dd></div>
+          <div><dt>Build</dt><dd><span>Python</span><span>TypeScript / Angular</span><span>Unity / C#</span><span>C++</span><span>SQL</span><span>CI/CD</span></dd></div>
+          <div><dt>AI &amp; data</dt><dd><span>LLM products</span><span>Prompt engineering</span><span>Pandas / ETL</span><span>Statistical analysis</span></dd></div>
+        </dl>
+
+        <h3 class="sub">In the press</h3>
+        <a class="interview" href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener">
+          <span class="mini">UCI ICS News · May 18, 2026</span>
+          <strong>Six ICS Students Compete in Capstone Competitions with Games Developed to Help Children Sleep</strong>
+          <span class="interview-note">Interviewed about designing and building the PVT games with Dr. Simon’s SLEEP Lab ↗</span>
         </a>
-    </main>
 
-    <script src="script.js"></script>
-    <script>
-    // ============================================================
-    //  TECH CANVAS — floating geometric nodes + connection lines
-    // ============================================================
-    (function() {
-        const canvas = document.getElementById('tech-canvas');
-        const ctx    = canvas.getContext('2d');
+        <h3 class="sub">Education</h3>
+        <ol class="cv-jobs">
+          <li>
+            <span class="cv-when">June 2026</span>
+            <div><strong class="cv-school">University of California, Irvine</strong>
+              <p class="cv-degree">B.S. Informatics, Human-Computer Interaction specialization · Minor in Computer Science</p></div>
+          </li>
+        </ol>
 
-        function resize() {
-            canvas.width  = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
+        <div class="cv-cta">
+          <!-- put your résumé PDF in this v3 folder as resume.pdf -->
+          <a class="btn btn-red" href="resume.pdf" target="_blank" rel="noopener">Download résumé (PDF) ↓</a>
+          <button class="btn btn-ghost copy-email" type="button">Copy my email</button>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/parbonichattopadhyay" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
 
-        const COLORS  = ['#ff6fa3', '#c792ea', '#89ca78', '#e2b93d', '#dbd9c8'];
-        const SHAPES  = ['circle', 'triangle', 'diamond', 'square'];
-        const COUNT   = 70;
-        const CONNECT = 160;
+    <!-- MESSAGES (contact) -->
+    <section class="win" id="win-messages" role="dialog" aria-labelledby="t-messages" hidden style="--tint:#E9E4FB; --w:420px">
+      <div class="win-bar">
+        <span class="win-title" id="t-messages">messages</span>
+        <button class="win-close" aria-label="Close messages">close ×</button>
+      </div>
+      <div class="win-body chat">
+        <div class="chat-head">
+          <img src="images/me-headshot.jpg" alt="">
+          <div><strong>Parboni</strong><span><i aria-hidden="true"></i>usually replies within a day</span></div>
+        </div>
+        <p class="chat-time">Today</p>
+        <div class="bubble them">hi! thanks for stopping by 👋</div>
+        <div class="bubble them">I’m open to UX engineering, product design and software roles, plus fun collaborations.</div>
+        <div class="bubble them">the fastest way to reach me is email: <strong>parboni845@gmail.com</strong>
+          <button class="copy-email linkish">copy my address</button>
+        </div>
+        <div class="bubble them links">
+          <a href="https://linkedin.com/in/parbonichattopadhyay" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/parbonichattopadhyay" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+        </div>
+        <div class="chat-chips" aria-label="Quick replies">
+          <button type="button" class="chip-reply">Let’s chat about a role</button>
+          <button type="button" class="chip-reply">Loved your PVT game!</button>
+          <button type="button" class="chip-reply">Coffee in NYC? ☕</button>
+        </div>
+        <form class="composer" id="composer">
+          <label class="sr-only" for="msg">Write a message</label>
+          <input id="msg" name="msg" type="text" placeholder="iMessage-style note → opens your email" autocomplete="off">
+          <button type="submit" aria-label="Send as email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
 
-        class Node {
-            constructor() { this.reset(true); }
-            reset(init) {
-                this.x     = Math.random() * canvas.width;
-                this.y     = init ? Math.random() * canvas.height : -20;
-                this.vx    = (Math.random() - 0.5) * 0.55;
-                this.vy    = (Math.random() - 0.5) * 0.55;
-                this.size  = Math.random() * 3 + 1.2;
-                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-                this.alpha = Math.random() * 0.45 + 0.15;
-                this.shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-                this.pulse = Math.random() * Math.PI * 2;
-            }
-            update() {
-                this.x     += this.vx;
-                this.y     += this.vy;
-                this.pulse += 0.02;
-                if (this.x < -20)              this.x = canvas.width + 20;
-                if (this.x > canvas.width + 20) this.x = -20;
-                if (this.y < -20)              this.y = canvas.height + 20;
-                if (this.y > canvas.height + 20) this.y = -20;
-            }
-            draw() {
-                const s = this.size * (1 + Math.sin(this.pulse) * 0.18);
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle   = this.color;
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth   = 1;
-                ctx.shadowColor = this.color;
-                ctx.shadowBlur  = 6;
-                ctx.beginPath();
-                if (this.shape === 'circle') {
-                    ctx.arc(this.x, this.y, s, 0, Math.PI * 2);
-                    ctx.fill();
-                } else if (this.shape === 'triangle') {
-                    ctx.moveTo(this.x, this.y - s * 2);
-                    ctx.lineTo(this.x + s * 1.7, this.y + s);
-                    ctx.lineTo(this.x - s * 1.7, this.y + s);
-                    ctx.closePath();
-                    ctx.stroke();
-                } else if (this.shape === 'diamond') {
-                    ctx.moveTo(this.x, this.y - s * 2);
-                    ctx.lineTo(this.x + s * 1.2, this.y);
-                    ctx.lineTo(this.x, this.y + s * 2);
-                    ctx.lineTo(this.x - s * 1.2, this.y);
-                    ctx.closePath();
-                    ctx.stroke();
-                } else {
-                    ctx.strokeRect(this.x - s, this.y - s, s * 2, s * 2);
-                }
-                ctx.restore();
-            }
-        }
+    <!-- TRASH -->
+    <section class="win" id="win-trash" role="dialog" aria-labelledby="t-trash" hidden style="--tint:#E7DED1; --w:400px">
+      <div class="win-bar">
+        <span class="win-title" id="t-trash">trash (3 items)</span>
+        <button class="win-close" aria-label="Close trash">close ×</button>
+      </div>
+      <div class="win-body">
+        <p class="hand">you weren’t supposed to look… but here’s what didn’t make the cut</p>
+        <ul class="trashlist">
+          <li><s>the original red-dot attention test</s><span>We turned it into sports games so kids would actually want to play.</span></li>
+          <li><s>2D versions of the PVT games</s><span>3D made the targets clearer, so we rebuilt them.</span></li>
+          <li><s>my old portfolio</s><span>You’re looking at its replacement.</span></li>
+        </ul>
+        <button class="btn btn-ghost empty-trash" type="button">Empty trash</button>
+      </div>
+    </section>
 
-        const nodes = Array.from({ length: COUNT }, () => new Node());
+  </main>
 
-        function drawConnections() {
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx   = nodes[i].x - nodes[j].x;
-                    const dy   = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < CONNECT) {
-                        const ratio = 1 - dist / CONNECT;
-                        ctx.save();
-                        ctx.globalAlpha = ratio * 0.18;
-                        ctx.strokeStyle = nodes[i].color;
-                        ctx.lineWidth   = ratio * 1.2;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.stroke();
-                        ctx.restore();
-                    }
-                }
-            }
-        }
+  <!-- ============================================================
+       DOCK
+       ============================================================ -->
+  <nav class="dock" aria-label="Dock">
+    <button data-open="projects" aria-label="Work"><svg class="app" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FB6FF"/><stop offset="1" stop-color="#1F6FE0"/></linearGradient><linearGradient id="gwf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE3FF"/><stop offset="1" stop-color="#7EC0FF"/></linearGradient></defs>
+<rect x="4" y="4" width="92" height="92" rx="22" fill="url(#gw)"/><path d="M20 34a5 5 0 0 1 5-5h16l6 6h28a5 5 0 0 1 5 5v31a5 5 0 0 1-5 5H25a5 5 0 0 1-5-5z" fill="#3F8CF0"/><path d="M20 42a5 5 0 0 1 5-5h50a5 5 0 0 1 5 5v29a5 5 0 0 1-5 5H25a5 5 0 0 1-5-5z" fill="url(#gwf)"/><path d="M36 56h28" stroke="#3F8CF0" stroke-width="4" stroke-linecap="round"/></svg><span class="tip">work</span></button>
+    <button data-open="about" aria-label="About"><svg class="app" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC2D1"/><stop offset="1" stop-color="#E8607F"/></linearGradient></defs>
+<rect x="4" y="4" width="92" height="92" rx="22" fill="url(#ga)"/><rect x="18" y="20" width="64" height="60" rx="10" fill="#FFF8F4"/><circle cx="50" cy="44" r="11" fill="#C9506E"/><path d="M30 72c3-12 11-17 20-17s17 5 20 17z" fill="#C9506E"/><rect x="14" y="30" width="6" height="8" rx="2" fill="#B23D5C"/><rect x="14" y="46" width="6" height="8" rx="2" fill="#B23D5C"/><rect x="14" y="62" width="6" height="8" rx="2" fill="#B23D5C"/></svg><span class="tip">about</span></button>
+    <button data-open="messages" aria-label="Contact"><svg class="app" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8B8FF"/><stop offset="1" stop-color="#7C5CE8"/></linearGradient></defs>
+<rect x="4" y="4" width="92" height="92" rx="22" fill="url(#gm)"/><path d="M50 22c18 0 31 11 31 25S68 72 50 72c-4 0-7-.5-10-1.4L26 78l4-11c-7-5-11-12-11-20 0-14 13-25 31-25z" fill="#fff"/><circle cx="38" cy="47" r="4" fill="#7C5CE8"/><circle cx="50" cy="47" r="4" fill="#7C5CE8"/><circle cx="62" cy="47" r="4" fill="#7C5CE8"/></svg><span class="tip">say hi</span></button>
+    <button data-open="resume" aria-label="Résumé"><svg class="app" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE59A"/><stop offset="1" stop-color="#F2B630"/></linearGradient></defs>
+<rect x="4" y="4" width="92" height="92" rx="22" fill="url(#gc)"/><path d="M28 16h32l14 14v52a4 4 0 0 1-4 4H28a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z" fill="#fff" transform="rotate(-6 50 50)"/><g transform="rotate(-6 50 50)"><path d="M60 16v14h14" fill="#EDE6D6"/><rect x="31" y="26" width="18" height="18" rx="3" fill="#F2B630"/><path d="M33 52h32M33 59h32M33 66h22" stroke="#C9BBAA" stroke-width="3.5" stroke-linecap="round"/><rect x="31" y="72" width="16" height="7" rx="2" fill="#D9472B"/></g></svg><span class="tip">résumé</span></button>
+    <span class="dock-sep" aria-hidden="true"></span>
+    <button data-open="trash" aria-label="Trash"><svg class="app" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="gt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9CDD3"/><stop offset=".5" stop-color="#F4F6F8"/><stop offset="1" stop-color="#B7BCC3"/></linearGradient></defs>
+<path d="M22 24h56l-6 66a6 6 0 0 1-6 5H34a6 6 0 0 1-6-5z" fill="url(#gt)" stroke="#8C939C" stroke-width="1.5"/><g stroke="#9AA1AA" stroke-width="1.2" opacity=".8"><path d="M30 34l40 50M40 30l34 42M24 40l38 48M50 28l26 32M24 54l26 34M62 28l14 16"/><path d="M70 34L30 84M60 30L26 72M76 40L38 88M50 28L24 60M76 54L50 88M38 28L24 44"/></g><ellipse cx="50" cy="24" rx="29" ry="5" fill="#E6E9ED" stroke="#8C939C" stroke-width="1.5"/></svg><span class="tip">trash</span></button>
+  </nav>
 
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            nodes.forEach(n => { n.update(); n.draw(); });
-            drawConnections();
-            requestAnimationFrame(loop);
-        }
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-        loop();
-    })();
-    </script>
+  <script src="os.js"></script>
 </body>
 </html>
