@@ -959,3 +959,18 @@ body { background: #1D2A44 url("images/nyc-skyline.jpg") 50% 62% / cover no-repe
 .notes-widget input { width: 19px; height: 19px; margin: 0; border: 1.5px solid #C7C7CC; border-radius: 50%; background: #fff; }
 .notes-widget input:checked { border-color: #F2B600; background: #F2B600 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat; }
 .notes-widget input:checked + span { text-decoration: line-through; text-decoration-thickness: 1px; color: #8E8E93; }
+
+/* design process */
+.process { list-style: none; counter-reset: st; margin: 0 0 14px; padding: 0; display: grid; gap: 10px; }
+.process li { counter-increment: st; display: grid; grid-template-columns: 28px 1fr; column-gap: 10px; font-size: 14.5px; line-height: 1.5; }
+.process li::before { content: counter(st); grid-row: span 2; width: 26px; height: 26px; border-radius: 50%; background: #2F6BDB; color: #fff; font: 600 13px var(--sans); display: grid; place-items: center; }
+.process b { font-weight: 600; }
+.proc-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 16px; }
+.proc-strip figure { margin: 0; }
+.proc-strip img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; background: #111; }
+.proc-strip figcaption { margin-top: 6px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.figma-demo .live-bar { background: #F3F0FF; }
+.hh-proto { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 14px; align-items: start; margin-bottom: 8px; }
+.hh-proto > img { width: 100%; border-radius: 18px; background: #000; }
+.hh-proto .live-demo { margin: 0; }
+@media (max-width: 760px) { .hh-proto { grid-template-columns: 1fr; } .hh-proto > img { max-width: 180px; } }
