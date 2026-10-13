@@ -137,9 +137,9 @@ document.querySelectorAll('.icon').forEach((icon) => {
   icon.addEventListener('pointerup', end);
   icon.addEventListener('pointercancel', end);
 
-  icon.addEventListener('click', () => {
-    if (dragged) { dragged = false; return; }
-    openWin(icon.dataset.open, icon);
+  icon.addEventListener('click', (e) => {
+    if (dragged) { dragged = false; e.preventDefault(); return; }
+    if (icon.dataset.open) openWin(icon.dataset.open, icon);
   });
 });
 
