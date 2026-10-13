@@ -987,3 +987,4 @@ body { background: #1D2A44 url("images/nyc-skyline.jpg") 50% 62% / cover no-repe
 .sub .mini { margin-left: 8px; }
 .boards, .board { min-width: 0; max-width: 100%; } .board-scroll { max-width: 100%; padding: 0; background: #474747; }
 .hh-static { grid-template-columns: 170px minmax(0,1fr); align-items: center; } .hh-static p { margin: 0; font-size: 15px; line-height: 1.55; }
+.board:first-child .board-scroll img { height: 220px; }
