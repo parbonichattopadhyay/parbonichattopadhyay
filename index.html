@@ -483,17 +483,32 @@
         <button class="win-close" aria-label="Close Zot Spot">close ×</button>
       </div>
       <div class="win-body">
-        <!-- Screenshot from the team's Devpost page. To keep it from ever breaking, save it to images/ and point src there. -->
+        <!-- Screenshots hotlinked from the team's Devpost gallery. To keep them from ever breaking, save them to images/ and point src there. -->
         <img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/384/datas/gallery.jpg" alt="Zot Spot map view showing UC Irvine restrooms with free period products marked on a campus map" onerror="this.style.display='none'">
         <span class="mini">VenusHacks 2025 · February 2025 · 6th place</span>
         <h2>Zot Spot</h2>
-        <ul class="chips"><li>Angular</li><li>TypeScript</li><li>Node.js</li><li>REST APIs</li></ul>
+        <p class="lede">Helping UC Irvine students quickly find free period products across campus.</p>
+        <ul class="chips"><li>Python</li><li>Flask</li><li>SQLite</li><li>SQLAlchemy</li><li>Leaflet.js</li><li>JavaScript</li><li>HTML/CSS</li><li>Render</li></ul>
         <dl class="story">
-          <div><dt>problem</dt><dd>UC Irvine students couldn’t tell which campus restrooms stocked free period products, or whether they were actually in stock.</dd></div>
-          <div><dt>what we built</dt><dd>A real-time menstrual-product availability platform, built with a six-person team: a campus map that finds the nearest stocked restroom, live pad and tampon stock levels, and quick reports when supplies run low.</dd></div>
+          <div><dt>inspiration</dt><dd>Managing a period on campus is stressful. Some restrooms stock free products, but students can’t tell which ones, whether they’re actually free, or whether they’re in stock right now, which means embarrassment and scrambling between classes, jobs and commutes.</dd></div>
+          <div><dt>what it does</dt><dd>An interactive campus map with live markers, geolocation to find the nearest stocked restroom, pad and tampon stock levels, quick reports when supplies run low, and labels for whether products are free and when each spot was last updated.</dd></div>
+          <div><dt>how we built it</dt><dd>A Flask + SQLite backend that organizes restrooms by building, floor and room; a responsive HTML/CSS/JavaScript front end; Leaflet.js for the map; browser geolocation and the Haversine formula for distance; and timestamped low-stock reports that show up in both the map and list views.</dd></div>
           <div><dt>what I did</dt><dd>Developed Angular/TypeScript views for location-based inventory, integrated with Node.js low-stock alerts.</dd></div>
-          <div><dt>outcome</dt><dd>Placed 6th at VenusHacks.</dd></div>
+          <div><dt>challenges</dt><dd>Collecting coordinates and room details for dozens of restrooms by hand, fitting clear but detailed info onto small screens (several rounds of layout and usability testing), and estimating realistic walking times.</dd></div>
+          <div><dt>what we learned</dt><dd>Wiring a map to a live reporting backend, working with geospatial and location data, and designing for a sensitive health topic with care and dignity.</dd></div>
+          <div><dt>what’s next</dt><dd>Partnering with UCI wellness and custodial teams on restocking, expanding to other campuses, gender-neutral and anonymous-reporting filters, a restocking analytics dashboard, more product types, and walking directions.</dd></div>
         </dl>
+
+        <h3 class="sub">Screens</h3>
+        <div class="proc-strip wide">
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/379/datas/gallery.jpg" alt="Zot Spot home page" loading="lazy"><figcaption>home</figcaption></figure>
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/381/datas/gallery.jpg" alt="List of campus restrooms with stock levels" loading="lazy"><figcaption>restroom list</figcaption></figure>
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/383/datas/gallery.jpg" alt="Updating stock for a restroom" loading="lazy"><figcaption>reporting stock</figcaption></figure>
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/385/datas/gallery.jpg" alt="Map view with a restroom selected" loading="lazy"><figcaption>map details</figcaption></figure>
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/439/762/datas/gallery.jpg" alt="Mobile map view" loading="lazy"><figcaption>mobile map</figcaption></figure>
+          <figure><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/439/763/datas/gallery.jpg" alt="Mobile map with a restroom selected" loading="lazy"><figcaption>mobile selection</figcaption></figure>
+        </div>
+
         <!-- live demo: loads only when the visitor clicks, so the free server isn't woken for every page view -->
         <div class="live-demo" data-src="https://venushacks-1.onrender.com/" data-title="Zot Spot live demo">
           <div class="live-bar">

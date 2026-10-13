@@ -991,3 +991,8 @@ body { background: #1D2A44 url("images/nyc-skyline.jpg") 50% 62% / cover no-repe
 
 /* résumé icon is a real link to the PDF */
 a.icon { text-decoration: none; color: inherit; }
+
+/* Zot Spot screens: landscape screenshots */
+.proc-strip.wide img { aspect-ratio: 16 / 10; object-position: top; }
+.lede { margin: 0 0 12px; font-size: 16px; line-height: 1.5; }
+@media (max-width: 760px) { .proc-strip.wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
