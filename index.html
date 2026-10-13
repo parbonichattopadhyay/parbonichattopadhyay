@@ -249,12 +249,12 @@
       <span class="peek" aria-hidden="true"><img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/003/435/384/datas/gallery.jpg" alt="" loading="lazy"><b>Zot Spot</b><small>live campus map · hackathon</small></span>
     </button>
 
-    <a class="icon" href="resume.pdf?v=2026-10-13" target="_blank" rel="noopener" style="--x:43%; --y:59%">
+    <button class="icon" data-open="resume" style="--x:43%; --y:59%">
       <span class="ico" aria-hidden="true">
         <svg viewBox="0 0 64 76"><path d="M6 4h36l16 16v50a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#FFFDF8" stroke="#2A2320" stroke-width="2"/><path d="M42 4v16h16" fill="none" stroke="#2A2320" stroke-width="2"/><path d="M14 32h30M14 40h34M14 48h24" stroke="#C9BBAA" stroke-width="3" stroke-linecap="round"/><rect x="10" y="56" width="26" height="12" rx="3" fill="#C2412B"/><text x="23" y="65" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="8" fill="#FFFDF8">PDF</text></svg>
       </span>
       <span class="label">résumé.pdf</span>
-    </a>
+    </button>
 
     <button class="icon" data-open="messages" style="--x:54%; --y:59%">
       <span class="ico ico-app" aria-hidden="true">
@@ -603,67 +603,79 @@
 
         <header class="cv-head">
           <div>
+            <span class="mini">résumé · highlights</span>
             <h2 id="cv-name">Parboni Chattopadhyay</h2>
-            <p class="cv-role">Designer &amp; software engineer · HCI + CS · New York, NY</p>
+            <p class="cv-role">Software engineer &amp; product designer · B.S. Informatics (HCI), minor in CS · New York, NY</p>
           </div>
-          <span class="cv-open"><i aria-hidden="true"></i>Open to UX engineering, product design &amp; software roles</span>
+          <span class="cv-open"><i aria-hidden="true"></i>Available now</span>
         </header>
 
-        <!-- proof first: the four things a hiring manager should see in 5 seconds -->
+        <div class="cv-cta cv-cta-top">
+          <a class="btn btn-red" href="resume.pdf?v=2026-10-13" target="_blank" rel="noopener">Open full résumé (PDF) ↗</a>
+          <button class="btn btn-ghost copy-email" type="button">Copy my email</button>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/parbonichattopadhyay" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+
+        <h3 class="sub">Roles I’m looking for</h3>
+        <ul class="cv-roles">
+          <li><strong>Software Engineer</strong><span>full-stack, systems &amp; tooling</span></li>
+          <li><strong>UX Engineer</strong><span>design-minded front end</span></li>
+          <li><strong>Product Designer</strong><span>research → Figma → shipped</span></li>
+          <li><strong>AI / LLM Product</strong><span>building with LLMs, responsibly</span></li>
+        </ul>
+
         <ul class="cv-stats" aria-label="Highlights">
-          <li><strong>2nd</strong><span>National Capstone Design Conference ’26</span></li>
-          <li><strong>ICCSE ’26</strong><span>Co-authored research paper</span></li>
-          <li><strong>1,200+</strong><span>Survey responses analyzed with LLM-assisted coding</span></li>
-          <li><strong>98%</strong><span>Faster enterprise deployments at Numecent</span></li>
+          <li><strong>90%+</strong><span>less time per clinical document review</span></li>
+          <li><strong>98%</strong><span>faster enterprise deployments at Numecent</span></li>
+          <li><strong>2nd</strong><span>nationally, Capstone Design Conference ’26</span></li>
+          <li><strong>ICCSE ’26</strong><span>co-authored research paper</span></li>
         </ul>
 
         <h3 class="sub">Experience</h3>
-        <ol class="cv-jobs">
-          <li>
-            <span class="cv-when">2026 – now</span>
-            <div><strong>Software Engineer &amp; LLM Product Manager</strong> <span class="cv-org">· Healthcare research group (contract)</span>
-              <p>Leading product <i>and</i> engineering for an internal AI tool: I scope it with researchers, design it, build it and ship every release, <b>owning the full lifecycle solo</b>.</p></div>
+        <ol class="cv-cards">
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Software Engineer &amp; LLM Product Manager</strong><span class="cv-when">Jul 2026 – now</span></div>
+            <span class="cv-org">Systems Intelligence Health Equity Research Group · North Jersey Management Solutions · contract</span>
+            <p>Built a privacy-first desktop app that automates review of sensitive clinical documents, cutting review time from <b>about an hour to a few minutes</b>. Sole engineer and PM, from requirements to release.</p>
+            <ul class="cv-tags"><li>product management</li><li>LLM apps</li><li>privacy-by-design</li><li>SDLC</li></ul>
           </li>
-          <li>
-            <span class="cv-when">2026</span>
-            <div><strong>Research Software Engineer</strong> <span class="cv-org">· Pediatric Sleep Research Lab, UCI School of Medicine</span>
-              <p>Built a Unity/C# cognitive-assessment game from clinical requirements and tested it with 30+ users. It won <b>2nd place nationally</b>.</p></div>
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Software Engineering Intern</strong><span class="cv-when">Jun – Sep 2025</span></div>
+            <span class="cv-org">Numecent · Irvine, CA</span>
+            <p>Engineered a C++/Win32 framework that runs PowerShell across SYSTEM and USER contexts, and cut firewall-rule deploys <b>98%+</b> (3.76s → 0.05s).</p>
+            <ul class="cv-tags"><li>C++</li><li>Win32 API</li><li>PowerShell</li><li>enterprise deployment</li></ul>
           </li>
-          <li>
-            <span class="cv-when">2025</span>
-            <div><strong>Systems Engineer</strong> <span class="cv-org">· NASA L’SPACE</span>
-              <p>Owned visualization and data analytics for a 10-person NASA mission proposal.</p></div>
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Research Software Engineer</strong><span class="cv-when">Jan – Jun 2026</span></div>
+            <span class="cv-org">Pediatric Sleep Research Lab · UC Irvine School of Medicine</span>
+            <p>Built a Unity/C# PVT game from clinical requirements, tested with 30+ users, and <b>won 2nd place nationally</b>.</p>
+            <ul class="cv-tags"><li>Unity / C#</li><li>usability testing</li><li>clinical UX</li></ul>
           </li>
-          <li>
-            <span class="cv-when">2025</span>
-            <div><strong>Software Engineering Intern</strong> <span class="cv-org">· Numecent</span>
-              <p>Built C++/Win32 deployment tooling and cut firewall-rule deploys from seconds to milliseconds (<b>98%+ faster</b>).</p></div>
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Research Software Engineer</strong><span class="cv-when">Jun 2024 – now</span></div>
+            <span class="cv-org">AI/LLM Education Impact Research · UC Irvine ICS</span>
+            <p>Built Python/Pandas pipelines and LLM-assisted coding for <b>1,200+ survey responses</b>, published at ICCSE 2026.</p>
+            <ul class="cv-tags"><li>Python</li><li>Pandas / ETL</li><li>statistics</li></ul>
           </li>
-          <li>
-            <span class="cv-when">2024 – now</span>
-            <div><strong>Research Software Engineer</strong> <span class="cv-org">· AI/LLM Education Impact Research, UCI</span>
-              <p>Built Python data pipelines and LLM-assisted coding for 1,200+ survey responses, which became an <b>ICCSE ’26 paper</b>.</p></div>
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Systems Engineer</strong><span class="cv-when">Aug – Dec 2025</span></div>
+            <span class="cv-org">NASA L’SPACE Research Program · remote</span>
+            <p>Led data visualization and analytics for a 10-person NASA mission proposal, plus requirements and trade studies.</p>
+            <ul class="cv-tags"><li>data viz</li><li>systems engineering</li></ul>
           </li>
-          <li>
-            <span class="cv-when">2024 – 2026</span>
-            <div><strong>Software Engineering Grader</strong> <span class="cv-org">· UC Irvine</span>
-              <p>Reviewed 200+ Python projects a quarter for code quality and design.</p></div>
+          <li class="cv-card">
+            <div class="cv-card-top"><strong>Software Engineering Grader</strong><span class="cv-when">Sep 2024 – Mar 2026</span></div>
+            <span class="cv-org">UC Irvine</span>
+            <p>Graded 200+ Python projects a quarter, running unit tests and reviewing object-oriented design.</p>
           </li>
         </ol>
 
         <h3 class="sub">Skills</h3>
         <dl class="cv-skills">
-          <div><dt>Design</dt><dd><span>Figma</span><span>Prototyping</span><span>Usability testing</span><span>WCAG 2.1 AA</span><span>Requirements analysis</span></dd></div>
-          <div><dt>Build</dt><dd><span>Python</span><span>TypeScript / Angular</span><span>Unity / C#</span><span>C++</span><span>SQL</span><span>CI/CD</span></dd></div>
+          <div><dt>Build</dt><dd><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>C++</span><span>C#</span><span>Java</span><span>SQL</span><span>Angular</span><span>Node.js</span><span>Flask</span><span>Unity</span></dd></div>
+          <div><dt>Design</dt><dd><span>Figma</span><span>Prototyping</span><span>Usability testing</span><span>Requirements analysis</span><span>WCAG 2.1</span></dd></div>
           <div><dt>AI &amp; data</dt><dd><span>LLM products</span><span>Prompt engineering</span><span>Pandas / ETL</span><span>Statistical analysis</span></dd></div>
         </dl>
-
-        <h3 class="sub">In the press</h3>
-        <a class="interview" href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener">
-          <span class="mini">UCI ICS News · May 18, 2026</span>
-          <strong>Six ICS Students Compete in Capstone Competitions with Games Developed to Help Children Sleep</strong>
-          <span class="interview-note">Interviewed about designing and building the PVT games with Dr. Simon’s SLEEP Lab ↗</span>
-        </a>
 
         <h3 class="sub">Education</h3>
         <ol class="cv-jobs">
@@ -674,11 +686,16 @@
           </li>
         </ol>
 
+        <h3 class="sub">In the press</h3>
+        <a class="interview" href="https://ics.uci.edu/2026/05/18/six-ics-students-compete-in-capstone-competitions-with-games-developed-to-help-children-sleep/" target="_blank" rel="noopener">
+          <span class="mini">UCI ICS News · May 18, 2026</span>
+          <strong>Six ICS Students Compete in Capstone Competitions with Games Developed to Help Children Sleep</strong>
+          <span class="interview-note">Interviewed about designing and building the PVT games with Dr. Simon’s SLEEP Lab ↗</span>
+        </a>
+
         <div class="cv-cta">
-          <!-- put your résumé PDF in this v3 folder as resume.pdf -->
-          <a class="btn btn-red" href="resume.pdf?v=2026-10-13" target="_blank" rel="noopener">Download résumé (PDF) ↓</a>
+          <a class="btn btn-red" href="resume.pdf?v=2026-10-13" target="_blank" rel="noopener">Open full résumé (PDF) ↗</a>
           <button class="btn btn-ghost copy-email" type="button">Copy my email</button>
-          <a class="btn btn-ghost" href="https://linkedin.com/in/parbonichattopadhyay" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
     </section>
