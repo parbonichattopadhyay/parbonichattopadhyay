@@ -974,3 +974,15 @@ body { background: #1D2A44 url("images/nyc-skyline.jpg") 50% 62% / cover no-repe
 .hh-proto > img { width: 100%; border-radius: 18px; background: #000; }
 .hh-proto .live-demo { margin: 0; }
 @media (max-width: 760px) { .hh-proto { grid-template-columns: 1fr; } .hh-proto > img { max-width: 180px; } }
+
+/* storyboards: scroll-only images */
+.boards { display: grid; gap: 14px; margin: 0 0 20px; }
+.board { margin: 0; }
+.board figcaption { margin-bottom: 6px; font-size: 13.5px; color: var(--muted); }
+.board figcaption b { color: var(--ink); font-weight: 600; }
+.board-scroll { overflow-x: auto; overflow-y: hidden; border-radius: 12px; background: #474747; padding: 8px; scroll-behavior: smooth; overscroll-behavior-x: contain; }
+.board-scroll:focus-visible { outline: 3px solid #2F6BDB; outline-offset: 2px; }
+.board-scroll img { display: block; height: 220px; width: auto; max-width: none; border-radius: 6px; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.board:first-child .board-scroll img { height: 260px; }
+.sub .mini { margin-left: 8px; }
+.boards, .board { min-width: 0; max-width: 100%; } .board-scroll { max-width: 100%; padding: 0; background: #474747; }
